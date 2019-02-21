@@ -1,0 +1,14 @@
+{
+  "name": "achilles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Krystian Kulesz",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "webpack": "^4.29.5"
+  }
+}
