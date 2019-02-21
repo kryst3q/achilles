@@ -8,14 +8,14 @@ const config = {
     entry: APP_DIR + '/index.jsx',
     output: {
         path: BUILD_DIR,
-        filename: 'achilles.js'
+        filename: 'app.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
-                test: "/\.jsx?/",
-                include: APP_DIR,
-                loader: 'babel'
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
             }
         ]
     }
