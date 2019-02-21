@@ -9,6 +9,12 @@
   "author": "Krystian Kulesz",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "babel-loader": "^8.0.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "webpack": "^4.29.5"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.2.3"
   }
 }
