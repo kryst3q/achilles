@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { IndexLinkContainer } from 'react-router-bootstrap';
-import Home from './Home';
-import FootwearForm from './FootwearForm';
+import Home from './Home.jsx';
+import FootwearForm from './FootwearForm.jsx';
 import OutfitForm from './OutfitForm.jsx';
 
 class Navigation extends Component {
