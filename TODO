@@ -1,2 +1,3 @@
-- webpack: add css loader
+- webpack: add css loader DONE
+- fix development mode
 - add module hot replacement (https://gaearon.github.io/react-hot-loader/getstarted/)

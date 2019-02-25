@@ -43,6 +43,4 @@ import '../node_modules/react-widgets/dist/css/react-widgets.css';
 Moment.locale('pl');
 momentLocalizer();
 
-const domContainer = document.querySelector('#app_container');
-ReactDOM.render(<App />, domContainer);
-// ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
