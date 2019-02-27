@@ -1,13 +1,19 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const BUILD_DIR = path.resolve(__dirname, 'dist');
-const APP_DIR = path.resolve(__dirname, 'src');
+// const BUILD_DIR = path.join(__dirname, 'dist');
+const BUILD_DIR = __dirname;
+const APP_DIR = path.join(__dirname, 'src', 'frontend');
 
 const config = {
-    devtool: "inline-source-map",
-    entry: APP_DIR + "/index.jsx",
+    devServer: {
+        contentBase: BUILD_DIR,
+        hot: true
+    },
+    devtool: "eval-source-map",
+    entry: {
+        app: path.join(APP_DIR, "index.jsx")
+    },
     output: {
         path: BUILD_DIR,
         filename: "app.js"
@@ -31,10 +37,7 @@ const config = {
     },
     mode: "development",
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "src/templates/index.html"),
-            filename: "index.html"
-        })
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
 

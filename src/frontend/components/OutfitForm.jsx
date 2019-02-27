@@ -81,7 +81,7 @@ class OutfitForm extends Component {
                 </Form.Group>
                 <Form.Row>
                     <Form.Group as={Col} controlId="periodStart">
-                        <Form.Label>Od</Form.Label>
+                        <Form.Label>Odido</Form.Label>
                         <DateTimePicker
                             min={new Date(966, 0, 1)}
                             max={new  Date()}

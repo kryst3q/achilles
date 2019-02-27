@@ -1,15 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
-import Moment from 'moment';
-import momentLocalizer from 'react-widgets-moment';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/react-widgets/dist/css/react-widgets.css';
+'use strict';
 
-// const electron = window.require('electron');
-// const fs = electron.remote.require('fs');
-// const ipcRenderer = electron.ipcRenderer;
-//
+const express = require('express');
+const path = require('path');
+
+const port = 8080;
+const app = express();
+
+app.use('/', require(path.join(__dirname, 'routes')));
+
+app.listen(port, function (error) {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log('ok', port);
+    }
+});
+
 // const dbPath = '/home/krystian/web/achilles.sqlite';
 //
 // if (fs.existsSync(dbPath)) {
@@ -39,8 +45,3 @@ import '../node_modules/react-widgets/dist/css/react-widgets.css';
 //     .catch(err => {
 //         console.error('Unable to connect to the database:', err);
 //     });
-
-Moment.locale('pl');
-momentLocalizer();
-
-ReactDOM.render(<App />, document.getElementById('root'));
