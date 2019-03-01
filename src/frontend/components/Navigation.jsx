@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { IndexLinkContainer } from 'react-router-bootstrap';
-import Home from './Home.jsx';
-import FootwearForm from './FootwearForm.jsx';
-import OutfitForm from './OutfitForm.jsx';
+import Home from './Home/Home.jsx';
+import Form from './Footwear/Form.jsx';
+import Form from './Outfit/Form.jsx';
 
 class Navigation extends Component {
     render() {
@@ -24,8 +24,8 @@ class Navigation extends Component {
                     </Nav>
 
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/footwear" component={FootwearForm} />
-                    <Route exact path="/outfit" component={OutfitForm} />
+                    <Route exact path="/footwear" component={Form} />
+                    <Route exact path="/outfit" component={Form} />
                 </div>
             </Router>
         );

@@ -1,8 +1,6 @@
-const webpack = require('webpack');
 const path = require('path');
 
-// const BUILD_DIR = path.join(__dirname, 'dist');
-const BUILD_DIR = __dirname;
+const BUILD_DIR = path.join(__dirname, 'dist');
 const APP_DIR = path.join(__dirname, 'src', 'frontend');
 
 const config = {
@@ -35,10 +33,7 @@ const config = {
             }
         ]
     },
-    mode: "development",
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+    mode: "development"
 };
 
 module.exports = config;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { DateTimePicker, Multiselect } from 'react-widgets';
 
-class OutfitForm extends Component {
+class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -117,4 +117,4 @@ class OutfitForm extends Component {
     }
 }
 
-export default OutfitForm;
+export default Form;
