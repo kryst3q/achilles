@@ -1,12 +1,29 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const name = sequelize.define('name', {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
-    });
+  const Name = sequelize.define('Name', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    displayValue: {
+        type: DataTypes.STRING
+    },
+    searchValue: {
+        type: DataTypes.STRING
+    },
+    createdAt: {
+        type: DataTypes.DATE
+    },
+    updatedAt: {
+        type: DataTypes.DATE
+    }
+  }, {});
 
-    return name;
+    Name.associate = function(models) {
+        Name.belongsTo(models.Language);
+    };
+
+    return Name;
 };
