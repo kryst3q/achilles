@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Name.associate = function(models) {
         Name.belongsTo(models.Language);
+        Name.belongsToMany(models.Outfit, { through: 'OutfitsNames' });
     };
 
     return Name;
