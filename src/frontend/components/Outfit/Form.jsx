@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form as RBForm, Button, Col } from 'react-bootstrap';
 import { DateTimePicker, Multiselect } from 'react-widgets';
+import axios from 'axios';
 
 class Form extends Component {
     constructor(props) {
@@ -21,6 +22,14 @@ class Form extends Component {
         this.handleNameSearch = this.handleNameSearch.bind(this);
         this.handlePeriodStartChange = this.handlePeriodStartChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('/language/list').then(response => {
+            this.setState({
+                names: response.data
+            });
+        });
     }
 
     handleNameChange(selectedNames) {
@@ -44,14 +53,13 @@ class Form extends Component {
     }
 
     handleChange(event) {
-        console.log(event);
         this.setState({
             [event.target.id]: event.target.value
         });
     }
 
     handleNameSearch(name) {
-        console.log(name);
+
     }
 
     handlePeriodStartChange(start) {
@@ -65,9 +73,9 @@ class Form extends Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="names">
-                    <Form.Label>Nazwy</Form.Label>
+            <RBForm onSubmit={this.handleSubmit}>
+                <RBForm.Group controlId="names">
+                    <RBForm.Label>Nazwy</RBForm.Label>
                     <Multiselect
                         valueField="id"
                         textField="name"
@@ -78,10 +86,10 @@ class Form extends Component {
                         onCreate={this.handleNameCreate}
                         onChange={this.handleNameChange}
                     />
-                </Form.Group>
-                <Form.Row>
-                    <Form.Group as={Col} controlId="periodStart">
-                        <Form.Label>Odido</Form.Label>
+                </RBForm.Group>
+                <RBForm.Row>
+                    <RBForm.Group as={Col} controlId="periodStart">
+                        <RBForm.Label>Odido</RBForm.Label>
                         <DateTimePicker
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
@@ -91,9 +99,9 @@ class Form extends Component {
                             views={["decade", "century"]}
                             onChange={this.handlePeriodStartChange}
                         />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="periodEnd">
-                        <Form.Label>do</Form.Label>
+                    </RBForm.Group>
+                    <RBForm.Group as={Col} controlId="periodEnd">
+                        <RBForm.Label>do</RBForm.Label>
                         <DateTimePicker
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
@@ -103,16 +111,16 @@ class Form extends Component {
                             views={["decade", "century"]}
                             onChange={this.handlePeriodStartChange}
                         />
-                    </Form.Group>
-                </Form.Row>
-                <Form.Group controlId="description">
-                    <Form.Label>Opis</Form.Label>
-                    <Form.Control type="text" value={this.state.description} onChange={this.handleChange}/>
-                </Form.Group>
+                    </RBForm.Group>
+                </RBForm.Row>
+                <RBForm.Group controlId="description">
+                    <RBForm.Label>Opis</RBForm.Label>
+                    <RBForm.Control type="text" value={this.state.description} onChange={this.handleChange}/>
+                </RBForm.Group>
                 <Button variant="primary" type="submit">
                     Wyślij
                 </Button>
-            </Form>
+            </RBForm>
         );
     }
 }

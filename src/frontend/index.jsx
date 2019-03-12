@@ -5,6 +5,9 @@ import Moment from 'moment';
 import momentLocalizer from 'react-widgets-moment';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/react-widgets/dist/css/react-widgets.css';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8080';
 
 // /* Potrzebne, żeby dostać się do funkcji electrona chyba */
 // const electron = window.require('electron');

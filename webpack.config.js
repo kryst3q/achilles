@@ -6,7 +6,11 @@ const APP_DIR = path.join(__dirname, 'src', 'frontend');
 const config = {
     devServer: {
         contentBase: BUILD_DIR,
-        hot: true
+        hot: true,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        }
     },
     devtool: "eval-source-map",
     entry: {
