@@ -2,6 +2,14 @@
 
 const path = require('path');
 const models = require(path.join(__dirname, '..', '..', 'models'));
+const { param } = require('express-validator/check');
+
+/*
+ * TODO: make this work!
+ */
+module.exports.middlewares = [
+    param('id').isInt()
+];
 
 module.exports.getAll = (req, res) => {
     models.Language.findAll()

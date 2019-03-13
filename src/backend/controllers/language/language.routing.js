@@ -11,6 +11,7 @@ module.exports = {
     },
     '/:id': {
         get: {
+            middlewares: getLanguage.middlewares,
             action: getLanguage.getOne,
             level: 'public'
         }
