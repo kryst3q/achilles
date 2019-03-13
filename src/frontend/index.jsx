@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import App from './screens/App.jsx';
 import Moment from 'moment';
 import momentLocalizer from 'react-widgets-moment';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';

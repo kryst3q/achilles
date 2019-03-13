@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { IndexLinkContainer } from 'react-router-bootstrap';
-import Home from './Home/Home.jsx';
-import FootwearForm from './Footwear/Form.jsx';
-import OutfitForm from './Outfit/Form.jsx';
+import Home from '../components/Home/Home.jsx';
+import ScreensOutfitList from '../screens/Outfit/List.jsx';
+import ScreensOutfitForm from '../screens/Outfit/Form.jsx';
 
 class Navigation extends Component {
     render() {
@@ -15,8 +15,8 @@ class Navigation extends Component {
                         <IndexLinkContainer to="/" activeClassName="active">
                             <Nav.Link >Home</Nav.Link>
                         </IndexLinkContainer>
-                        <IndexLinkContainer to="/footwear" activeClassName="active">
-                            <Nav.Link >Footwear</Nav.Link>
+                        <IndexLinkContainer to="/outfits" activeClassName="active">
+                            <Nav.Link>Outfits</Nav.Link>
                         </IndexLinkContainer>
                         <IndexLinkContainer to="/outfit" activeClassName="active">
                             <Nav.Link>Outfit</Nav.Link>
@@ -24,8 +24,8 @@ class Navigation extends Component {
                     </Nav>
 
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/footwear" component={FootwearForm} />
-                    <Route exact path="/outfit" component={OutfitForm} />
+                    <Route exact path="/outfits" component={ScreensOutfitList} />
+                    <Route exact path="/outfit" component={ScreensOutfitForm} />
                 </div>
             </Router>
         );
