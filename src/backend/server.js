@@ -3,13 +3,19 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const lumie = require('lumie');
 
 const port = 8080;
 const app = express();
 
 app.use(cors());
 
-app.use('/', require(path.join(__dirname, 'routes')));
+lumie.load(app, {
+    preURL: 'api',
+    verbose: true,
+    ignore: ['*.spec', '*.action'],
+    controllers_path: path.join(__dirname, 'controllers')
+});
 
 app.listen(port, function (error) {
     if (error) {
