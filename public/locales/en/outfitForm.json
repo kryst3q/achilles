@@ -1,0 +1,19 @@
+{
+  "dating": {
+    "from": {
+      "label": "From"
+    },
+    "to": {
+      "label": "to"
+    }
+  },
+  "description": {
+    "label": "Description"
+  },
+  "name": {
+    "label": "Names"
+  },
+  "submit": {
+    "label": "Send"
+  }
+}

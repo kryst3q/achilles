@@ -1,6 +1,6 @@
 const path = require('path');
 
-const BUILD_DIR = path.join(__dirname, 'dist');
+const BUILD_DIR = path.join(__dirname, 'public');
 const APP_DIR = path.join(__dirname, 'src', 'frontend');
 
 const config = {

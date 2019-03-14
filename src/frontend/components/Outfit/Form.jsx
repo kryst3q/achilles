@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form as RBForm, Button, Col } from 'react-bootstrap';
 import { DateTimePicker, Multiselect } from 'react-widgets';
 import axios from 'axios';
+import { withTranslation } from 'react-i18next';
 
 class Form extends Component {
     constructor(props) {
@@ -72,10 +73,12 @@ class Form extends Component {
     }
 
     render() {
+        const {t} = this.props;
+
         return (
             <RBForm onSubmit={this.handleSubmit}>
                 <RBForm.Group controlId="names">
-                    <RBForm.Label>Nazwy</RBForm.Label>
+                    <RBForm.Label>{t('name.label')}</RBForm.Label>
                     <Multiselect
                         valueField="id"
                         textField="name"
@@ -89,7 +92,7 @@ class Form extends Component {
                 </RBForm.Group>
                 <RBForm.Row>
                     <RBForm.Group as={Col} controlId="periodStart">
-                        <RBForm.Label>Odido</RBForm.Label>
+                        <RBForm.Label>{t('dating.from.label')}</RBForm.Label>
                         <DateTimePicker
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
@@ -101,7 +104,7 @@ class Form extends Component {
                         />
                     </RBForm.Group>
                     <RBForm.Group as={Col} controlId="periodEnd">
-                        <RBForm.Label>do</RBForm.Label>
+                        <RBForm.Label>{t('dating.to.label')}</RBForm.Label>
                         <DateTimePicker
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
@@ -114,7 +117,7 @@ class Form extends Component {
                     </RBForm.Group>
                 </RBForm.Row>
                 <RBForm.Group controlId="description">
-                    <RBForm.Label>Opis</RBForm.Label>
+                    <RBForm.Label>{t('description.label')}</RBForm.Label>
                     <RBForm.Control type="text" value={this.state.description} onChange={this.handleChange}/>
                 </RBForm.Group>
                 <Button variant="primary" type="submit">
@@ -125,4 +128,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default withTranslation('outfitForm')(Form);
