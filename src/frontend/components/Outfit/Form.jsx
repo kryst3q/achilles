@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Form as RBForm, Button, Col } from 'react-bootstrap';
 import { DateTimePicker, Multiselect } from 'react-widgets';
 import axios from 'axios';
 import { withTranslation } from 'react-i18next';
@@ -8,11 +7,9 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            names: [
-                { id: 'chocolate', name: 'Chocolate' },
-                { id: 'strawberry', name: 'Strawberry' },
-                { id: 'vanilla', name: 'Vanilla' }
-            ],
+            names: [],
+            datingStart: '',
+            datingEnd: '',
             description: '',
             selectedNames: []
         };
@@ -21,7 +18,8 @@ class Form extends Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleNameSearch = this.handleNameSearch.bind(this);
-        this.handlePeriodStartChange = this.handlePeriodStartChange.bind(this);
+        this.handleDatingStartChange = this.handleDatingStartChange.bind(this);
+        this.handleDatingEndChange = this.handleDatingEndChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -63,7 +61,11 @@ class Form extends Component {
 
     }
 
-    handlePeriodStartChange(start) {
+    handleDatingStartChange(start) {
+
+    }
+
+    handleDatingEndChange(start) {
 
     }
 
@@ -76,54 +78,62 @@ class Form extends Component {
         const {t} = this.props;
 
         return (
-            <RBForm onSubmit={this.handleSubmit}>
-                <RBForm.Group controlId="names">
-                    <RBForm.Label>{t('name.label')}</RBForm.Label>
+            <form onSubmit={this.handleSubmit}>
+                <div>
+                    <label htmlFor='names'>{ t('name.label') }</label>
                     <Multiselect
-                        valueField="id"
-                        textField="name"
+                        id='names'
+                        valueField='id'
+                        textField='name'
                         data={this.state.names}
                         value={this.state.selectedNames}
-                        allowCreate="onFilter"
+                        allowCreate='onFilter'
                         onSearch={this.handleNameSearch}
                         onCreate={this.handleNameCreate}
                         onChange={this.handleNameChange}
                     />
-                </RBForm.Group>
-                <RBForm.Row>
-                    <RBForm.Group as={Col} controlId="periodStart">
-                        <RBForm.Label>{t('dating.from.label')}</RBForm.Label>
+                </div>
+                <div>
+                    <div>
+                        <label htmlFor='datingStart'>{ t('dating.start.label') }</label>
                         <DateTimePicker
+                            id='datingStart'
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
-                            format="Y"
+                            format='Y'
                             date={true}
                             time={false}
-                            views={["decade", "century"]}
-                            onChange={this.handlePeriodStartChange}
+                            views={['decade', 'century']}
+                            onChange={this.handleDatingStartChange}
                         />
-                    </RBForm.Group>
-                    <RBForm.Group as={Col} controlId="periodEnd">
-                        <RBForm.Label>{t('dating.to.label')}</RBForm.Label>
+                    </div>
+                    <div>
+                        <label htmlFor='datingEnd'>{ t('dating.end.label') }</label>
                         <DateTimePicker
+                            id='datingEnd'
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
-                            format="Y"
+                            format='Y'
                             date={true}
                             time={false}
-                            views={["decade", "century"]}
-                            onChange={this.handlePeriodStartChange}
+                            views={['decade', 'century']}
+                            onChange={this.handleDatingEndChange}
                         />
-                    </RBForm.Group>
-                </RBForm.Row>
-                <RBForm.Group controlId="description">
-                    <RBForm.Label>{t('description.label')}</RBForm.Label>
-                    <RBForm.Control type="text" value={this.state.description} onChange={this.handleChange}/>
-                </RBForm.Group>
-                <Button variant="primary" type="submit">
-                    Wyślij
-                </Button>
-            </RBForm>
+                    </div>
+                </div>
+                <div>
+                    <label htmlFor='description'>{ t('description.label') }</label>
+                    <input
+                        id='description'
+                        type='text'
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                    />
+                </div>
+                <button type='submit'>
+                    { t('submit.label') }
+                </button>
+            </form>
         );
     }
 }

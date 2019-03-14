@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component, Suspense} from 'react';
 import Navigation from './Navigation.jsx';
 import { hot } from 'react-hot-loader/root';
+import Spinner from "react-spinner-material";
 
 class App extends Component {
   render() {
-    return <Navigation/>;
+    return (
+        <Suspense fallback={<Spinner size={120} spinnerColor={"#333"} spinnerWidth={2} visible={true} />}>
+          <Navigation/>
+        </Suspense>
+    );
   }
 }
 

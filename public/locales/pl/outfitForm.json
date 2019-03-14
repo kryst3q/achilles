@@ -1,9 +1,9 @@
 {
   "dating": {
-    "from": {
+    "start": {
       "label": "Od"
     },
-    "to": {
+    "end": {
       "label": "do"
     }
   },

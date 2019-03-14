@@ -1,9 +1,9 @@
 {
   "dating": {
-    "from": {
+    "start": {
       "label": "From"
     },
-    "to": {
+    "end": {
       "label": "to"
     }
   },
