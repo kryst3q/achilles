@@ -8,38 +8,42 @@ class Form extends Component {
         super(props);
         this.state = {
             names: [],
-            datingStart: '',
-            datingEnd: '',
+            datingStart: new Date(),
+            datingEnd: new Date(),
             description: '',
-            selectedNames: []
+            foundNames: [],
+            isSubmitting: false
         };
 
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleNameCreate = this.handleNameCreate.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.handleNameSearch = this.handleNameSearch.bind(this);
-        this.handleDatingStartChange = this.handleDatingStartChange.bind(this);
-        this.handleDatingEndChange = this.handleDatingEndChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        axios.get('/language/list').then(response => {
-            this.setState({
-                names: response.data
-            });
-        });
-    }
+    // componentDidMount() {
+    //     axios.get('/language/list').then(response => {
+    //         this.setState({
+    //             foundNames: response.data
+    //         });
+    //     });
+    // }
 
-    handleNameChange(selectedNames) {
+    handleInputChange(event) {
+        console.log(event);
+
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
         this.setState({
-            selectedNames: selectedNames
-        })
+            [name]: value
+        });
     }
 
     handleNameCreate(name) {
         let names = this.state.names;
-        let selectedNames = this.state.selectedNames;
+        let foundNames = this.state.foundNames;
         let newOption = {
             id: names.length,
             name: name
@@ -47,91 +51,110 @@ class Form extends Component {
 
         this.setState({
             names: [...names, newOption],
-            selectedNames: [...selectedNames, newOption]
+            foundNames: [...foundNames, newOption]
         })
     }
 
-    handleChange(event) {
-        this.setState({
-            [event.target.id]: event.target.value
-        });
-    }
-
     handleNameSearch(name) {
-
-    }
-
-    handleDatingStartChange(start) {
-
-    }
-
-    handleDatingEndChange(start) {
-
+        axios.get('/language/search', {
+            params: {
+                term: name
+            }
+        })
+            .then(response => {
+                this.setState({
+                    foundNames: response.data
+                });
+            })
+            .catch();
     }
 
     handleSubmit(event) {
-        console.log(this.state);
         event.preventDefault();
+        console.log(event, this.state);
     }
 
     render() {
-        const {t} = this.props;
+        const { t } = this.props;
 
         return (
             <form onSubmit={this.handleSubmit}>
                 <div>
-                    <label htmlFor='names'>{ t('name.label') }</label>
+                    <label htmlFor='names'>{ t('outfitForm:name.label') }</label>
                     <Multiselect
                         id='names'
+                        name='names'
                         valueField='id'
                         textField='name'
-                        data={this.state.names}
-                        value={this.state.selectedNames}
+                        data={this.state.foundNames}
+                        defaultValue={this.state.names}
                         allowCreate='onFilter'
                         onSearch={this.handleNameSearch}
                         onCreate={this.handleNameCreate}
-                        onChange={this.handleNameChange}
+                        onChange={(value) => this.handleInputChange({
+                            target: {
+                                type: 'select',
+                                name: 'names',
+                                value: value
+                            }
+                        })}
                     />
                 </div>
                 <div>
                     <div>
-                        <label htmlFor='datingStart'>{ t('dating.start.label') }</label>
+                        <label htmlFor='datingStart'>{ t('outfitForm:dating.start.label') }</label>
                         <DateTimePicker
                             id='datingStart'
+                            name='datingStart'
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
                             format='Y'
                             date={true}
                             time={false}
                             views={['decade', 'century']}
-                            onChange={this.handleDatingStartChange}
+                            defaultValue={this.state.datingStart}
+                            onChange={(value) => this.handleInputChange({
+                                target: {
+                                    type: 'datetime',
+                                    name: 'datingStart',
+                                    value: value
+                                }
+                            })}
                         />
                     </div>
                     <div>
-                        <label htmlFor='datingEnd'>{ t('dating.end.label') }</label>
+                        <label htmlFor='datingEnd'>{ t('outfitForm:dating.end.label') }</label>
                         <DateTimePicker
                             id='datingEnd'
+                            name='datingEnd'
                             min={new Date(966, 0, 1)}
                             max={new  Date()}
                             format='Y'
                             date={true}
                             time={false}
                             views={['decade', 'century']}
-                            onChange={this.handleDatingEndChange}
+                            defaultValue={this.state.datingEnd}
+                            onChange={(value) => this.handleInputChange({
+                                target: {
+                                    type: 'datetime',
+                                    name: 'datingEnd',
+                                    value: value
+                                }
+                            })}
                         />
                     </div>
                 </div>
                 <div>
-                    <label htmlFor='description'>{ t('description.label') }</label>
+                    <label htmlFor='description'>{ t('outfitForm:description.label') }</label>
                     <input
-                        id='description'
                         type='text'
+                        name='description'
                         value={this.state.description}
-                        onChange={this.handleChange}
+                        onChange={this.handleInputChange}
                     />
                 </div>
-                <button type='submit'>
-                    { t('submit.label') }
+                <button type='submit' disabled={this.state.isSubmitting}>
+                    { t('outfitForm:submit.label') }
                 </button>
             </form>
         );

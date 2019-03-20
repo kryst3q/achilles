@@ -11,22 +11,7 @@ module.exports.middlewares = [
     param('id').isInt()
 ];
 
-module.exports.getAll = (req, res) => {
-    models.Language.findAll()
-        .then(languages => {
-            res
-                .status(200)
-                .json(languages)
-            ;
-        }).catch(error => {
-            res
-                .status(400)
-                .json(error)
-            ;
-        });
-};
-
-module.exports.getOne = (req, res) => {
+module.exports.action = (req, res) => {
     models.Language.findByPk(req.params.id)
         .then(language => {
             res

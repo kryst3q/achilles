@@ -1,18 +1,26 @@
 'use strict';
 
-const getLanguage = require('./get-language.action.js');
+const getAll = require('./get-all.action.js');
+const getOne = require('./get-one.action.js');
+const getSearch = require('./get-search.action.js');
 
 module.exports = {
     '/list': {
         get: {
-            action: getLanguage.getAll,
+            action: getAll.action,
+            level: 'public'
+        }
+    },
+    '/search': {
+        get: {
+            action: getSearch.action,
             level: 'public'
         }
     },
     '/:id': {
         get: {
-            middlewares: getLanguage.middlewares,
-            action: getLanguage.getOne,
+            middlewares: getOne.middlewares,
+            action: getOne.action,
             level: 'public'
         }
     }
