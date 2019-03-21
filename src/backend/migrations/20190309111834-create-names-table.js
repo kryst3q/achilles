@@ -12,12 +12,21 @@ module.exports = {
           displayValue: {
               type: Sequelize.STRING,
               allowNull: false,
-              unique: true
+              unique: 'name_value_language_unique'
           },
           searchValue: {
               type: Sequelize.STRING,
-              allowNull: false,
-              unique: true
+              allowNull: false
+          },
+          LanguageId: {
+              type: Sequelize.INTEGER,
+              references: {
+                  model: 'Languages',
+                  key: 'id'
+              },
+              unique: 'name_value_language_unique',
+              onDelete: 'SET NULL',
+              onUpdate: 'CASCADE'
           },
           createdAt: {
               allowNull: false,

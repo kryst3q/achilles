@@ -7,27 +7,22 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            names: [],
+            Names: [],
             datingStart: new Date(),
             datingEnd: new Date(),
             description: '',
             foundNames: [],
-            isSubmitting: false
+            isSubmitting: false,
+            newNames: []
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleNameCreate = this.handleNameCreate.bind(this);
         this.handleNameSearch = this.handleNameSearch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
 
-    // componentDidMount() {
-    //     axios.get('/language/list').then(response => {
-    //         this.setState({
-    //             foundNames: response.data
-    //         });
-    //     });
-    // }
+        this.imageFileInput = React.createRef();
+    }
 
     handleInputChange(event) {
         console.log(event);
@@ -42,36 +37,49 @@ class Form extends Component {
     }
 
     handleNameCreate(name) {
-        let names = this.state.names;
-        let foundNames = this.state.foundNames;
+        let Names = this.state.Names;
+        let newNames = this.state.newNames;
         let newOption = {
-            id: names.length,
-            name: name
+            id: Names.length,
+            displayValue: name,
+            searchName: name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
         };
 
         this.setState({
-            names: [...names, newOption],
-            foundNames: [...foundNames, newOption]
+            Names: [...Names, newOption],
+            newNames: [...newNames, newOption]
         })
     }
 
     handleNameSearch(name) {
-        axios.get('/language/search', {
-            params: {
-                term: name
-            }
-        })
-            .then(response => {
-                this.setState({
-                    foundNames: response.data
-                });
+        if (2 < name.length) {
+            axios.get('/name/search', {
+                params: {
+                    term: name
+                }
             })
-            .catch();
+                .then(response => {
+                    console.log(response.data)
+                    this.setState({
+                        foundNames: response.data
+                    });
+                })
+                .catch();
+        }
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(event, this.state);
+
+        let { foundNames, isSubmitting, newNames, ...data} = this.state;
+console.log(data);
+        // axios.post('/outfit', data)
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     });
     }
 
     render() {
@@ -83,18 +91,18 @@ class Form extends Component {
                     <label htmlFor='names'>{ t('outfitForm:name.label') }</label>
                     <Multiselect
                         id='names'
-                        name='names'
+                        name='Names'
                         valueField='id'
-                        textField='name'
+                        textField='displayValue'
                         data={this.state.foundNames}
-                        defaultValue={this.state.names}
+                        defaultValue={this.state.Names}
                         allowCreate='onFilter'
                         onSearch={this.handleNameSearch}
                         onCreate={this.handleNameCreate}
                         onChange={(value) => this.handleInputChange({
                             target: {
                                 type: 'select',
-                                name: 'names',
+                                name: 'Names',
                                 value: value
                             }
                         })}
@@ -145,12 +153,20 @@ class Form extends Component {
                     </div>
                 </div>
                 <div>
-                    <label htmlFor='description'>{ t('outfitForm:description.label') }</label>
+                    <label htmlFor='description'>{ t('description.label') }</label>
                     <input
                         type='text'
                         name='description'
                         value={this.state.description}
                         onChange={this.handleInputChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor='image'>{ t('image.label') }</label>
+                    <input
+                        type='file'
+                        name='image'
+                        ref={this.imageFileInput}
                     />
                 </div>
                 <button type='submit' disabled={this.state.isSubmitting}>

@@ -1,11 +1,14 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const Outfit = sequelize.define('Outfit', {
+  const OutfitDescription = sequelize.define('OutfitDescription', {
       id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true
+      },
+      description: {
+        type: DataTypes.STRING
       },
       createdAt: {
           type: DataTypes.DATE
@@ -15,10 +18,9 @@ module.exports = (sequelize, DataTypes) => {
       }
   }, {});
 
-  Outfit.associate = function(models) {
-      Outfit.belongsToMany(models.Name, { through: 'OutfitsNames' });
-      Outfit.hasMany(models.OutfitDescription, { as: 'Description' });
+  OutfitDescription.associate = function(models) {
+    // associations can be defined here
   };
 
-  return Outfit;
+  return OutfitDescription;
 };

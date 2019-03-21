@@ -2,6 +2,7 @@
 
 const getAll = require('./get-all.action.js');
 const getOne = require('./get-one.action.js');
+const getSearch = require('./get-search.action.js');
 const postAdd = require('./post-add.action.js');
 
 module.exports = {
@@ -14,6 +15,12 @@ module.exports = {
     '/list': {
         get: {
             action: getAll.action,
+            level: 'public'
+        }
+    },
+    '/search': {
+        get: {
+            action: getSearch.action,
             level: 'public'
         }
     },

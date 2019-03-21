@@ -10,6 +10,9 @@
   "description": {
     "label": "Description"
   },
+  "image": {
+    "label": "Graphics"
+  },
   "name": {
     "label": "Names"
   },
