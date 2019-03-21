@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Outfit.associate = function(models) {
-      Outfit.belongsToMany(models.Name, { through: 'OutfitsNames' });
+      Outfit.belongsToMany(models.Name, { as: 'Names', through: 'OutfitsNames' });
+      Outfit.belongsToMany(models.Image, { as: 'Images', through: 'OutfitsImages' });
       Outfit.hasMany(models.OutfitDescription, { as: 'Description' });
   };
 

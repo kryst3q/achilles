@@ -5,12 +5,14 @@ const path = require('path');
 const cors = require('cors');
 const lumie = require('lumie');
 const busboy = require('connect-busboy');
+const bodyParser = require('body-parser');
 
 const port = 8080;
 const app = express();
 
 app.use(cors());
 app.use(busboy());
+app.use(bodyParser.json());
 
 lumie.load(app, {
     preURL: 'api',

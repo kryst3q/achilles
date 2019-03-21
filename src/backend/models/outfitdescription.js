@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   OutfitDescription.associate = function(models) {
-    // associations can be defined here
+      OutfitDescription.belongsTo(models.Language);
   };
 
   return OutfitDescription;

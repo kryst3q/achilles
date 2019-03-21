@@ -8,11 +8,15 @@ const { param } = require('express-validator/check');
  * TODO: make this work!
  */
 module.exports.middlewares = [
-    param('id').isInt()
-];
+    // param('id').isInt()
+];3
 
 module.exports.action = (req, res) => {
-    models.Language.findByPk(req.params.id)
+    models.Language.findOne({
+        where: {
+            code: req.params.code
+        }
+    })
         .then(language => {
             res
                 .status(200)

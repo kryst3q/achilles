@@ -9,7 +9,8 @@ module.exports.action = (req, res) => {
         where: {
             searchValue: {
                 [Op.like]: '%' + req.query.term + '%'
-            }
+            },
+            LanguageId: req.query.LanguageId
         }
     })
         .then(names => {

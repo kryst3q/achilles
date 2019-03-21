@@ -14,10 +14,12 @@ module.exports = {
         OutfitId: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            unique: 'outfit_name_unique'
         },
         NameId: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            unique: 'outfit_name_unique'
         }
     });
   },

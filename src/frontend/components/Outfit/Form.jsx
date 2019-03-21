@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DateTimePicker, Multiselect } from 'react-widgets';
 import axios from 'axios';
-import { withTranslation } from 'react-i18next';
+import { withTranslation, getI18n } from 'react-i18next';
 
 class Form extends Component {
     constructor(props) {
@@ -13,7 +13,8 @@ class Form extends Component {
             description: '',
             foundNames: [],
             isSubmitting: false,
-            newNames: []
+            newNames: [],
+            Language: {}
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,9 +25,19 @@ class Form extends Component {
         this.imageFileInput = React.createRef();
     }
 
-    handleInputChange(event) {
-        console.log(event);
+    componentDidMount() {
+        axios.get('/language/' + getI18n().language)
+            .then(res => {
+                this.setState({
+                    Language: res.data
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
+    handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -55,31 +66,67 @@ class Form extends Component {
         if (2 < name.length) {
             axios.get('/name/search', {
                 params: {
-                    term: name
+                    term: name,
+                    LanguageId: this.state.Language.id
                 }
             })
-                .then(response => {
-                    console.log(response.data)
+                .then(res => {
                     this.setState({
-                        foundNames: response.data
+                        foundNames: res.data
                     });
                 })
-                .catch();
+                .catch(err => {
+                    console.log(err);
+                });
         }
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
-        let { foundNames, isSubmitting, newNames, ...data} = this.state;
-console.log(data);
-        // axios.post('/outfit', data)
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
+        this.setState({
+            isSubmitting: true
+        });
+
+        let files = this.imageFileInput.current.files;
+        let Files = [];
+
+        if (files.length > 0) {
+            Array.from(files).forEach(file => {
+                let formData = new FormData();
+                formData.append('file', file);
+
+                axios.post('/file/upload', formData)
+                    .then(res => {
+                        Files.push({ File: res.data });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            });
+        }
+
+        let data = {
+            Names: this.state.Names,
+            Images: Files,
+            Description: {
+                description: this.state.description,
+                LanguageId: this.state.Language.id
+            }
+        };
+
+        axios.post('/outfit', data)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                this.setState({
+                    isSubmitting: false
+                })
+            });
     }
 
     render() {
