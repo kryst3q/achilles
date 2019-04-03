@@ -89,44 +89,46 @@ class Form extends Component {
         });
 
         let files = this.imageFileInput.current.files;
-        let Files = [];
+        let Images = files.map(file => axios.post('/image', (new FormData()).append('file', file)).then(res => res.data));
 
-        if (files.length > 0) {
-            Array.from(files).forEach(file => {
-                let formData = new FormData();
-                formData.append('file', file);
+        // if (files.length > 0) {
+        //     Array.from(files).forEach(file => {
+        //         let formData = new FormData();
+        //         formData.append('file', file);
+        //
+        //         axios.post('/file/upload', formData)
+        //             .then(res => axios.post('/image', res.data)
+        //                 .then(res => Images.push(res.data))
+        //             )
+        //             .catch(err => {
+        //                 console.log(err);
+        //             });
+        //     });
+        // }
 
-                axios.post('/file/upload', formData)
-                    .then(res => {
-                        Files.push({ File: res.data });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
-            });
-        }
+        Promise.all(Images).then(() => {
+            let data = {
+                Names: this.state.Names,
+                Images: Images,
+                Description: {
+                    description: this.state.description,
+                    LanguageId: this.state.Language.id
+                }
+            };
 
-        let data = {
-            Names: this.state.Names,
-            Images: Files,
-            Description: {
-                description: this.state.description,
-                LanguageId: this.state.Language.id
-            }
-        };
-
-        axios.post('/outfit', data)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            .finally(() => {
-                this.setState({
-                    isSubmitting: false
+            axios.post('/outfit', data)
+                .then(res => {
+                    console.log(res);
                 })
-            });
+                .catch(err => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    this.setState({
+                        isSubmitting: false
+                    })
+                });
+        });
     }
 
     render() {

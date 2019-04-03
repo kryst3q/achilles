@@ -5,7 +5,6 @@
 * add dark/light theme
 * how set up global vars (passing theme info, spinner config etc.)
 * use [styled-components](https://www.styled-components.com/)
-* use [connect-busboy](https://www.npmjs.com/package/connect-busboy) to backend file upload manage
 * add Dating model
 * add Relic model
 * add Reference model (bibliography management)
@@ -19,6 +18,7 @@
 ## DONE
 * add File model
 * add Image model
+* use [connect-busboy](https://www.npmjs.com/package/connect-busboy) to backend file upload manage
 
 ## NO
 * form validation
