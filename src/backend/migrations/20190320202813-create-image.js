@@ -23,6 +23,13 @@ module.exports = {
       originDate: {
         type: Sequelize.DATE
       },
+      FileId: {
+          type: Sequelize.INTEGER,
+          references: {
+              model: 'Files',
+              key: 'id'
+          }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

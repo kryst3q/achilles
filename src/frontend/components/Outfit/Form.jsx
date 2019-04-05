@@ -89,24 +89,22 @@ class Form extends Component {
         });
 
         let files = this.imageFileInput.current.files;
-        let Images = files.map(file => axios.post('/image', (new FormData()).append('file', file)).then(res => res.data));
+        let Images = [];
+        let ImagePromises = [];
 
-        // if (files.length > 0) {
-        //     Array.from(files).forEach(file => {
-        //         let formData = new FormData();
-        //         formData.append('file', file);
-        //
-        //         axios.post('/file/upload', formData)
-        //             .then(res => axios.post('/image', res.data)
-        //                 .then(res => Images.push(res.data))
-        //             )
-        //             .catch(err => {
-        //                 console.log(err);
-        //             });
-        //     });
-        // }
+        Array.from(files).map(file => ImagePromises.push(
+                new Promise(function (resolve, reject) {
+                    let formData = new FormData();
+                    formData.append('file', file);
 
-        Promise.all(Images).then(() => {
+                    axios.post('/image/', formData)
+                        .then(res => resolve(Images.push(res.data)))
+                        .catch(err => reject(console.log(err)))
+                })
+            )
+        );
+
+        Promise.all(ImagePromises).then(() => {
             let data = {
                 Names: this.state.Names,
                 Images: Images,
