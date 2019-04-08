@@ -7,19 +7,19 @@ const { param, validationResult } = require('express-validator/check');
 module.exports.middlewares = [
     param('id')
         .isInt().withMessage('Not int')
-        .custom(value => {
-        return models.Outfit.findByPk(value)
-            .then(outfit => {
-                if (!outfit) {
-                    return Promise.reject('Not found');
-                }
-            })
+        .custom((value, { req }) => {
+            return models.Outfit.findByPk(value)
+                .then(outfit => {
+                    if (!outfit) {
+                        return Promise.reject(req.t('navigation.outfit'));
+                    }
+                })
     })
 ];
 
 module.exports.action = (req, res) => {
     const errors = validationResult(req);
-    
+
     if (!errors.isEmpty()) {
         return res
             .status(400)
