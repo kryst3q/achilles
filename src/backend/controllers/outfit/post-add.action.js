@@ -7,9 +7,9 @@ module.exports.action = (req, res) => {
     const body = req.body;
 
     models.Outfit.create()
-        .then(outfit => body.Names.map(name => models.Name.findByPk(name.id).then(Name => Name.addOutfit(outfit)).catch(err => err)))
-        .then(outfit => body.Images.map(image => models.Image.findByPk(image.id).then(Image => Image.addOutfit(outfit)).catch(err => err)))
-        .then(outfit => models.OutfitDescription.create({...body.Description, OutfitId: outfit.id}).then(description => description))
+        .then(outfit => Promise.all(body.Images.map(image => models.Image.findByPk(image.id).then(Image => Image.addOutfit(outfit)))).then(() => outfit))
+        .then(outfit => Promise.all(body.Names.map(name => models.Name.findByPk(name.id).then(Name => Name.addOutfit(outfit)))).then(() => outfit))
+        .then(outfit => models.OutfitDescription.create({...body.Description, OutfitId: outfit.id}))
         .then(outfit => {
             res
                 .status(201)
