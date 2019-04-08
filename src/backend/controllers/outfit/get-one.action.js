@@ -2,8 +2,32 @@
 
 const path = require('path');
 const models = require(path.join(__dirname, '..', '..', 'models'));
+const { param, validationResult } = require('express-validator/check');
+
+module.exports.middlewares = [
+    param('id')
+        .isInt().withMessage('Not int')
+        .custom(value => {
+        return models.Outfit.findByPk(value)
+            .then(outfit => {
+                if (!outfit) {
+                    return Promise.reject('Not found');
+                }
+            })
+    })
+];
 
 module.exports.action = (req, res) => {
+    const errors = validationResult(req);
+    
+    if (!errors.isEmpty()) {
+        return res
+            .status(400)
+            .json({
+                errors: errors.array({ onlyFirstError: true })
+            });
+    }
+    
     models.Outfit.findByPk(req.params.id)
         .then(outfit => {
             const data = {
@@ -59,6 +83,7 @@ module.exports.action = (req, res) => {
                 );
         })
         .catch(error => {
+            console.log(error);
             res
                 .status(400)
                 .json(error)

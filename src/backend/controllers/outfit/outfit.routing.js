@@ -19,6 +19,7 @@ module.exports = {
     },
     '/:id': {
         get: {
+            middlewares: getOne.middlewares,
             action: getOne.action,
             level: 'public'
         }
