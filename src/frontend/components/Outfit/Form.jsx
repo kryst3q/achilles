@@ -221,6 +221,7 @@ class Form extends Component {
                         name='image'
                         ref={this.imageFileInput}
                         multiple={true}
+                        accept="image/jpeg,image/png"
                     />
                 </div>
                 <button type='submit' disabled={this.state.isSubmitting}>
