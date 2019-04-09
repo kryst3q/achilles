@@ -90,9 +90,9 @@ class Form extends Component {
 
         let files = this.imageFileInput.current.files;
         let Images = [];
-        let ImagePromises = [];
+        let promises = [];
 
-        Array.from(files).map(file => ImagePromises.push(
+        Array.from(files).map(file => promises.push(
                 new Promise(function (resolve, reject) {
                     let formData = new FormData();
                     formData.append('file', file);
@@ -104,7 +104,7 @@ class Form extends Component {
             )
         );
 
-        Promise.all(ImagePromises).then(() => {
+        Promise.all(promises).then(() => {
             let data = {
                 Names: this.state.Names,
                 Images: Images,
@@ -220,6 +220,7 @@ class Form extends Component {
                         type='file'
                         name='image'
                         ref={this.imageFileInput}
+                        multiple={true}
                     />
                 </div>
                 <button type='submit' disabled={this.state.isSubmitting}>
