@@ -1,0 +1,6 @@
+{
+  "getOne": {
+    "notFound": "Nie odnaleziono ubioru o podanym identyfikatorze",
+    "notInt": "Podany identyfikator ubioru nie jest liczbą"
+  }
+}

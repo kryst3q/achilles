@@ -6,12 +6,14 @@ const { param, validationResult } = require('express-validator/check');
 
 module.exports.middlewares = [
     param('id')
-        .isInt().withMessage('Not int')
+        .isInt().withMessage((value, { req }) => {
+            return req.t('outfitController:getOne:notInt');
+        })
         .custom((value, { req }) => {
             return models.Outfit.findByPk(value)
                 .then(outfit => {
                     if (!outfit) {
-                        return Promise.reject(req.t('navigation.outfit'));
+                        return Promise.reject(req.t('outfitController:getOne:notFound'));
                     }
                 })
     })

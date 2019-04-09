@@ -1,0 +1,6 @@
+{
+  "getOne": {
+    "notFound": "Outfit with given identifier not found",
+    "notInt": "Given outfit's identifier is not integer"
+  }
+}
