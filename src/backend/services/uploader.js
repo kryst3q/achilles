@@ -6,6 +6,9 @@ const crypto = require('crypto');
 const fs = require('fs');
 const models = require(path.join(__dirname, '..', 'models'));
 
+/*
+ * TODO handle error when image was already uploaded
+ */
 module.exports.upload = (fieldname, file, filename, encoding, mimetype) => {
     return new Promise((resolve, reject) => {
         /* Temporary save file to tmp dir */

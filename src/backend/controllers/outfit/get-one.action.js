@@ -38,15 +38,18 @@ module.exports.action = (req, res) => {
             let promises = [];
 
             promises.push(
-                new Promise(function(resolve, reject) {
+                new Promise((resolve, reject) => {
                     outfit.getNames()
-                        .then(names => resolve(data.names = names.map(name => ({id: name.id, value: name.displayValue}))))
+                        .then(names => resolve(data.names = names.map(name => ({
+                            id: name.id,
+                            value: name.displayValue
+                        }))))
                         .catch(err => reject(console.log(err)))
                 })
             );
 
             promises.push(
-                new Promise(function (resolve, reject) {
+                new Promise((resolve, reject) => {
                     outfit.getImages()
                         .then(images => resolve(
                             Promise.all(images.map(image => image.getFile()))
@@ -65,12 +68,27 @@ module.exports.action = (req, res) => {
             );
 
             promises.push(
-                new Promise(function (resolve, reject) {
+                new Promise((resolve, reject) => {
                     outfit.getDescription()
                         .then(descriptions => resolve(
-                            data.description = {id: descriptions[0].id, value: descriptions[0].description}
+                            data.description = {
+                                id: descriptions[0].id,
+                                value: descriptions[0].description
+                            }
                         ))
                         .catch(err => reject(console.log(err)))
+                })
+            );
+
+            promises.push(
+                new Promise((resolve, reject) => {
+                    outfit.getDatings()
+                        .then(datings => resolve(data.datings = datings.map(dating => ({
+                            id: dating.id,
+                            start: dating.start,
+                            end: dating.end
+                        }))))
+                        .catch(err => reject(console.log(err)));
                 })
             );
 

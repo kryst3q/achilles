@@ -111,7 +111,13 @@ class Form extends Component {
                 Description: {
                     description: this.state.description,
                     LanguageId: this.state.Language.id
-                }
+                },
+                Datings: [
+                    {
+                        start: this.state.datingStart,
+                        end: this.state.datingEnd
+                    }
+                ]
             };
 
             axios.post('/outfit', data)
