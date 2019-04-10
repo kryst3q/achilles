@@ -14,14 +14,15 @@ class List extends Component {
     componentDidMount() {
         axios
             .get(
-                '/outfit/list',
+                '/outfit/list?LanguageId=' + '129',
                 {
                     headers: { 'Accept-Language': getI18n().language }
                 }
             )
             .then(res => {
+                console.log(res.data);
                 this.setState({
-                    list: [res.data]
+                    list: res.data
                 });
             })
             .catch(err => {
