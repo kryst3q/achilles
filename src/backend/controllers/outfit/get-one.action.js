@@ -57,7 +57,10 @@ module.exports.action = (req, res) => {
                                     data.images = images.map(image => {
                                         for (var i = 0; i < files.length; i++) {
                                             if (files[i].id === image.FileId) {
-                                                return {id: image.id, value: files[i].hash};
+                                                return {
+                                                    id: image.id,
+                                                    value: path.join(__dirname, '..', '..', '..', '..', '..', 'public', 'uploads', files[i].hash)
+                                                };
                                             }
                                         }
                                     })
