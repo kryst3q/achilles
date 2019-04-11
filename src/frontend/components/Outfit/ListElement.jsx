@@ -1,21 +1,22 @@
 import React from 'react';
 
-const ListElement = (element) => {
-    const outfit = element.outfit;
-
+const ListElement = (props) => {
     return (
         <div>
             <div>
                 <img
-                    src={'uploads/' + outfit.Images[0].File.hash}
+                    /*
+                     * TODO handle preparing path to images (global const?)
+                     */
+                    src={'uploads/' + props.src}
                     height={150}
                 />
             </div>
             <div>
-                {outfit.Names.map((name) => (
-                    <span key={name.id.toString()}>
-                    {name.displayValue}
-                </span>
+                {props.names.map((name) => (
+                    <span key={name.id}>
+                        {name.displayValue}
+                    </span>
                 ))}
             </div>
         </div>

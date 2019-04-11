@@ -89,7 +89,6 @@ class Form extends Component {
         });
 
         let files = this.imageFileInput.current.files;
-        let Images = [];
         let promises = [];
 
         Array.from(files).map(file => promises.push(
@@ -98,13 +97,13 @@ class Form extends Component {
                     formData.append('file', file);
 
                     axios.post('/image/', formData)
-                        .then(res => resolve(Images.push(res.data)))
+                        .then(res => resolve(res.data))
                         .catch(err => reject(console.log(err)))
                 })
             )
         );
 
-        Promise.all(promises).then(() => {
+        Promise.all(promises).then((Images) => {
             let data = {
                 Names: this.state.Names,
                 Images: Images,

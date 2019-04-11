@@ -2,16 +2,38 @@
 
 const path = require('path');
 const models = require(path.join(__dirname, '..', '..', 'models'));
-const { param } = require('express-validator/check');
+const { param, validationResult } = require('express-validator/check');
 
-/*
- * TODO: make this work!
- */
 module.exports.middlewares = [
-    // param('id').isInt()
-];3
+    param('code')
+        .matches(/^[a-z]{2}$/).withMessage((value, { req }) => {
+            return req.t('languageController:invalidCode');
+        })
+        .custom((value, { req }) => {
+            return models.Language.findOne({
+                where: {
+                    code: req.params.code
+                }
+            })
+                .then(language => {
+                    if (!language) {
+                        return Promise.reject(req.t('languageController:notFound'));
+                    }
+                });
+        })
+];
 
 module.exports.action = (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res
+            .status(400)
+            .json({
+                errors: errors.array({ onlyFirstError: true })
+            });
+    }
+
     models.Language.findOne({
         where: {
             code: req.params.code

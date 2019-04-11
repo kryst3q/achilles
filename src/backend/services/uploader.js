@@ -6,6 +6,9 @@ const crypto = require('crypto');
 const fs = require('fs');
 const models = require(path.join(__dirname, '..', 'models'));
 
+/*
+ * TODO refactorize: slice this monolith into smaller pieces
+ */
 module.exports.upload = (fieldname, file, filename, encoding, mimetype) => {
     return new Promise((resolve, reject) => {
         /* Temporary save file to tmp dir */
@@ -15,9 +18,13 @@ module.exports.upload = (fieldname, file, filename, encoding, mimetype) => {
 
         tmpWriteStream.on('close', () => {
             const tmpReadStream = fs.createReadStream(saveTo);
-            const hash = crypto.createHash('md5');
+            let hash = crypto.createHash('md5');
 
-            tmpReadStream.pipe(hash).on('finish', () => {
+            tmpReadStream.on('data', (data) => {
+                hash.update(data);
+            });
+
+            tmpReadStream.on('end', () => {
                 const hashString = hash.digest('hex');
                 const moveTo = path.join('public', 'uploads', hashString);
 
@@ -34,6 +41,8 @@ module.exports.upload = (fieldname, file, filename, encoding, mimetype) => {
                     tmpReadStream.pipe(finalWriteStream);
 
                     finalWriteStream.on('close', () => {
+                        fs.unlinkSync(saveTo);
+
                         models.File.create({
                             hash: hashString,
                             name: filename.slice(0, filename.indexOf('.')),

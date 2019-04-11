@@ -17,11 +17,14 @@ i18next
     .use(i18nextMiddleware.LanguageDetector)
     .use(i18nextBackend)
     .init({
-        debug: true,
+        debug: false,
         load: 'current',
         fallbackLng: 'en',
         lowerCaseLng: true,
-        ns: ['outfitController'],
+        ns: [
+            'outfitController',
+            'languageController'
+        ],
         backend: {
             loadPath: path.join(__dirname, '..', '..', 'public', 'locales', '{{lng}}', '{{ns}}.json')
         }
