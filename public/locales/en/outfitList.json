@@ -1,3 +1,9 @@
 {
-  "noRecords": "No records found"
+  "noRecords": "No records found",
+  "contextMenu": {
+    "menuItem": {
+      "addToCompare": "Add to compare",
+      "removeFromCompare": "Remove from compare"
+    }
+  }
 }

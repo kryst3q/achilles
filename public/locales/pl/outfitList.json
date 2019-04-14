@@ -1,3 +1,9 @@
 {
-  "noRecords": "Nie odnaleziono żadnych ubiorów"
+  "noRecords": "Nie odnaleziono żadnych ubiorów",
+  "contextMenu": {
+    "menuItem": {
+      "addToCompare": "Dodaj do porównania",
+      "removeFromCompare": "Usuń z porównania"
+    }
+  }
 }
