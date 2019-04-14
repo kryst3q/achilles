@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {getI18n, withTranslation} from 'react-i18next';
 import { ContextMenuTrigger } from 'react-contextmenu';
-import ContextMenu from './ListElementContextMenu.jsx';
-import ListElement from './ListElement.jsx';
+import ContextMenu from './ListElementContextMenu';
+import ListElement from './ListElement';
 
 class List extends Component {
     constructor(props) {

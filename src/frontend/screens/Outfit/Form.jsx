@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import Spinner from 'react-spinner-material';
-import OutfitForm from '../../components/Outfit/Form.jsx';
+import OutfitForm from '../../components/Outfit/Form';
 
 const ScreensOutfitForm = () => (
     <div className="workbench">

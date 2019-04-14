@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import { IndexLinkContainer } from 'react-router-bootstrap';
 import { withTranslation } from 'react-i18next';
-import Home from '../components/Home/Home.jsx';
-import ScreensOutfitList from '../screens/Outfit/List.jsx';
-import ScreensOutfitForm from '../screens/Outfit/Form.jsx';
+import Home from '../components/Home/Home';
+import ScreensOutfitList from '../screens/Outfit/List';
+import ScreensOutfitForm from '../screens/Outfit/Form';
 
 class Navigation extends Component {
     render() {

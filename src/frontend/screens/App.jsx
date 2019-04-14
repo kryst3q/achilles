@@ -1,5 +1,5 @@
 import React, {Component, Suspense} from 'react';
-import Navigation from './Navigation.jsx';
+import Navigation from './Navigation';
 import { hot } from 'react-hot-loader/root';
 import Spinner from "react-spinner-material";
 

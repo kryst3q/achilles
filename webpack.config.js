@@ -37,7 +37,10 @@ const config = {
             }
         ]
     },
-    mode: "development"
+    mode: "development",
+    resolve: {
+        extensions: [ ".jsx", ".js", ".webpack.config.js" ]
+    }
 };
 
 module.exports = config;

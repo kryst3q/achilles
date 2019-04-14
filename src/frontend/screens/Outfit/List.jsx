@@ -1,5 +1,5 @@
 import React from 'react';
-import OutfitList from '../../components/Outfit/List.jsx';
+import OutfitList from '../../components/Outfit/List';
 
 const ScreensOutfitList = () => (
     <div className="workbench">
