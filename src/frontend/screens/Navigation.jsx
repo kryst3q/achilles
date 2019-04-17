@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import Home from '../components/Home/Home';
 import ScreensOutfitList from '../screens/Outfit/List';
 import ScreensOutfitForm from '../screens/Outfit/Form';
+import ScreensComparision from '../screens/UI/Comparision';
 
 class Navigation extends Component {
     render() {
@@ -23,11 +24,15 @@ class Navigation extends Component {
                         <IndexLinkContainer to="/outfit" activeClassName="active">
                             <li>{ t('outfit') }</li>
                         </IndexLinkContainer>
+                        <IndexLinkContainer to="/comparision" activeClassName="active">
+                            <li>{ t('comparision') }</li>
+                        </IndexLinkContainer>
                     </ul>
 
                     <Route exact path="/" component={Home} />
                     <Route exact path="/outfits" component={ScreensOutfitList} />
                     <Route exact path="/outfit" component={ScreensOutfitForm} />
+                    <Route exact path="/comparision" component={ScreensComparision} />
                 </div>
             </Router>
         );

@@ -38,33 +38,36 @@ class List extends Component {
             });
     }
 
+    prepareListElements(contextMenuId) {
+        return this.state.list.map((element, index) => (
+            <div key={index}>
+                <ContextMenuTrigger
+                    id={contextMenuId}
+                    collect={() => element}
+                >
+                    <ListElement
+                        key={element.id.toString()}
+                        src={element.Images[0].File.hash}
+                        names={element.Names}
+                    />
+                </ContextMenuTrigger>
+            </div>
+        ));
+    }
+
+    prepareNoRecordsElement(t) {
+        return <span>{ t('outfitList:noRecords') }</span>;
+    }
+
     render() {
         const { t } = this.props;
-        const contextMenuId = 'outfitContextMenu';
-        let list  = this.state.list;
+        const contextMenuId = 'outfitListElementContextMenu';
+        const listElements = this.prepareListElements(contextMenuId);
+        const noRecordsElement = this.prepareNoRecordsElement(t);
 
         return (
             <div>
-                {
-                    0 < list.length
-                        ?
-                        list.map((element, index) => (
-                            <div key={index}>
-                                <ContextMenuTrigger
-                                    id={contextMenuId}
-                                    collect={() => element}
-                                >
-                                    <ListElement
-                                        key={element.id.toString()}
-                                        src={element.Images[0].File.hash}
-                                        names={element.Names}
-                                    />
-                                </ContextMenuTrigger>
-                            </div>
-                        ))
-                        :
-                        <span>{ t('outfitList:noRecords') }</span>
-                }
+                {0 < this.state.list.length ? listElements : noRecordsElement}
                 <ContextMenu contextMenuId={contextMenuId} />
             </div>
         );
