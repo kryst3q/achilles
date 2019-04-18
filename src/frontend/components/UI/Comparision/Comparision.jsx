@@ -5,6 +5,7 @@ import { ContextMenuTrigger } from 'react-contextmenu';
 import ContextMenu from './ComparisionElementContextMenu';
 import Sortable from 'react-sortablejs';
 import ComparisionElement from './ComparisionElement';
+import uniqueId from 'lodash.uniqueid';
 
 class Comparision extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class Comparision extends Component {
         this.toCompareStateRefresh = this.toCompareStateRefresh.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.fetchDataToCompare();
     }
 
@@ -55,14 +56,15 @@ class Comparision extends Component {
     }
 
     prepareComparisionElements(contextMenuId) {
-        return this.state.toCompare.map((element, index) => (
-            <div key={index}>
+        return this.state.toCompare.map(element => (
+            <div key={uniqueId()}>
                 <ContextMenuTrigger
+                    key={uniqueId()}
                     id={contextMenuId}
                     collect={() => element}
                 >
                     <ComparisionElement
-                        key={element.Images[0].File.id}
+                        key={uniqueId()}
                         src={element.Images[0].File.hash}
                     />
                 </ContextMenuTrigger>
@@ -70,8 +72,10 @@ class Comparision extends Component {
         ));
     }
 
-    toCompareStateRefresh() {
-        this.fetchDataToCompare();
+    toCompareStateRefresh(newValues) {
+        this.setState({
+            toCompare: newValues
+        });
     }
 
     render() {
@@ -90,6 +94,7 @@ class Comparision extends Component {
                             </Sortable>
                             <ContextMenu
                                 toCompareStateRefresh={this.toCompareStateRefresh}
+                                toCompare={this.state.toCompare}
                                 contextMenuId={contextMenuId}
                             />
                         </div>

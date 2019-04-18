@@ -3,19 +3,20 @@ import { ContextMenu, MenuItem } from 'react-contextmenu';
 import { useTranslation } from 'react-i18next';
 
 const ComparisionElementContextMenu = (props) => {
-    const { contextMenuId, toCompareStateRefresh } = props;
+    const { contextMenuId, toCompare, toCompareStateRefresh } = props;
     const { t, i18n } = useTranslation('outfitList');
 
     function handleRemoveFromCompare(event, data) {
         // TODO creata file/class to store consts with eg. localStorage keys
-        const toCompare = JSON.parse(localStorage.getItem('toCompare'));
+        const items = JSON.parse(localStorage.getItem('toCompare'));
 
         localStorage.setItem(
             'toCompare',
-            JSON.stringify(toCompare.filter(element => element.id !== data.id && element.model === 'Outfit'))
+            JSON.stringify(items.filter(item => item.id !== data.id && item.model === 'Outfit'))
         );
 
-        toCompareStateRefresh();
+        let newValues = toCompare.filter(element => element.id !== data.id);
+        toCompareStateRefresh(newValues);
     }
 
     return (
