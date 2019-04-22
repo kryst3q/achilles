@@ -91,6 +91,8 @@ class Form extends Component {
         let files = this.imageFileInput.current.files;
         let promises = [];
 
+        /* TODO handle saving new names!!! */
+
         Array.from(files).map(file => promises.push(
                 new Promise(function (resolve, reject) {
                     let formData = new FormData();

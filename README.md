@@ -11,6 +11,14 @@
 * write tests to recent routings (jest, supertest)
 * write tests to recent components
 * write test to electron app
+* add screens for list elements !!!
+* add Note model
+* add Note editor component
+* add Note list component
+* add Note list element component
+* handle saving new names
+* handle managing names
+* handle managing images
 
 ## DONE
 * add File model

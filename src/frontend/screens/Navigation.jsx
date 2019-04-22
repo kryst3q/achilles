@@ -5,6 +5,8 @@ import { withTranslation } from 'react-i18next';
 import Home from '../components/Home/Home';
 import ScreensOutfitList from '../screens/Outfit/List';
 import ScreensOutfitForm from '../screens/Outfit/Form';
+import ScreensNoteList from '../screens/Note/List';
+import ScreensNoteEditor from '../screens/Note/Editor';
 import ScreensComparision from '../screens/UI/Comparision';
 
 class Navigation extends Component {
@@ -18,6 +20,12 @@ class Navigation extends Component {
                         <IndexLinkContainer to="/" activeClassName="active">
                             <li>{ t('workspace') }</li>
                         </IndexLinkContainer>
+                        <IndexLinkContainer to="/notes" activeClassName="active">
+                            <li>{ t('notes') }</li>
+                        </IndexLinkContainer>
+                        <IndexLinkContainer to="/note" activeClassName="active">
+                            <li>{ t('note') }</li>
+                        </IndexLinkContainer>
                         <IndexLinkContainer to="/outfits" activeClassName="active">
                             <li>{ t('outfits') }</li>
                         </IndexLinkContainer>
@@ -30,6 +38,8 @@ class Navigation extends Component {
                     </ul>
 
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/notes" component={ScreensNoteList} />
+                    <Route exact path="/note" component={ScreensNoteEditor} />
                     <Route exact path="/outfits" component={ScreensOutfitList} />
                     <Route exact path="/outfit" component={ScreensOutfitForm} />
                     <Route exact path="/comparision" component={ScreensComparision} />
