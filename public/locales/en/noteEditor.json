@@ -1,3 +1,6 @@
 {
-
+  "title": {
+    "placeholder": "Note title"
+  },
+  "save": "Save"
 }

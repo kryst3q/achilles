@@ -1,0 +1,12 @@
+{
+  "getOne": {
+    "notFound": "Note with given identifier not found",
+    "notInt": "Given note's identifier is not integer"
+  },
+  "postAddOrUpdate": {
+    "title": {
+      "empty": "Title must consist at least of one character",
+      "required": "Note title is required"
+    }
+  }
+}

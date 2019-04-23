@@ -1,3 +1,6 @@
 {
-
+  "title": {
+    "placeholder": "Tytuł notatki"
+  },
+  "save": "Zapisz"
 }

@@ -1,0 +1,12 @@
+{
+  "getOne": {
+    "notFound": "Nie odnaleziono notatki o podanym identyfikatorze",
+    "notInt": "Podany identyfikator notatki nie jest liczbą"
+  },
+  "postAddOrUpdate": {
+    "title": {
+      "empty": "Tytuł musi się składać przynajmniej z jednej litery",
+      "required": "Tytuł notatki jest wymagany"
+    }
+  }
+}

@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {getI18n, withTranslation} from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 
 class NoteEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            note: {
-                content: ''
-            }
+            id: 0,
+            title: '',
+            content: '',
+            createdAt: '',
+            updatedAt: ''
         };
 
         this.handleEditorChange = this.handleEditorChange.bind(this);
+        this.handleSaveClick = this.handleSaveClick.bind(this);
+        this.handleTitleChange = this.handleTitleChange.bind(this);
     }
 
     componentDidMount() {
@@ -21,24 +25,54 @@ class NoteEditor extends Component {
 
     handleEditorChange(e) {
         this.setState({
-           note: {
-               content: e.target.getContent()
-           }
+           content: e.target.getContent()
         });
+    }
+
+    handleTitleChange(e) {
+        this.setState({
+            title: e.target.value
+        });
+    }
+
+    handleSaveClick() {
+        axios
+            .post('/note', this.state)
+            .then((r) => {
+                this.setState(r.data)
+            })
+            .catch((e) => alert(e.data));
     }
 
     render() {
         const { t } = this.props;
 
         return (
-            <Editor
-                initialValue={this.state.note.content}
-                init={{
-                    plugins: 'link image code',
-                    toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
-                }}
-                onChange={this.handleEditorChange}
-            />
+            <div>
+                <div>
+                    <input
+                        id='noteTitle'
+                        type='text'
+                        value={this.state.title}
+                        onChange={this.handleTitleChange}
+                        placeholder={t('title.placeholder')}
+                        required={true}
+                    />
+                </div>
+                <div>
+                    <Editor
+                        initialValue={this.state.content}
+                        init={{
+                            plugins: 'link image code',
+                            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                        }}
+                        onChange={this.handleEditorChange}
+                    />
+                </div>
+                <div>
+                    <button type='button' onClick={this.handleSaveClick}>{t('save')}</button>
+                </div>
+            </div>
         );
     }
 }

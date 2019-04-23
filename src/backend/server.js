@@ -23,7 +23,8 @@ i18next
         lowerCaseLng: true,
         ns: [
             'outfitController',
-            'languageController'
+            'languageController',
+            'noteController'
         ],
         backend: {
             loadPath: path.join(__dirname, '..', '..', 'public', 'locales', '{{lng}}', '{{ns}}.json')

@@ -12,8 +12,6 @@
 * write tests to recent components
 * write test to electron app
 * add screens for list elements !!!
-* add Note model
-* add Note editor component
 * add Note list component
 * add Note list element component
 * handle saving new names
@@ -27,6 +25,8 @@
 * add translations to backend
 * make [lumie](https://github.com/Alex-Levacher/Lumie) + [express-validator](https://express-validator.github.io/docs/) work
 * add Dating model
+* add Note model
+* add Note editor component
 
 ## NO
 * form validation
