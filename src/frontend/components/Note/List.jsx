@@ -12,9 +12,15 @@ class List extends Component {
         this.state = {
             list: []
         };
+
+        this.fetchListData = this.fetchListData.bind(this);
     }
 
     componentDidMount() {
+        this.fetchListData();
+    }
+
+    fetchListData() {
         axios
             .get('/note/list')
             .then(res => {
@@ -30,10 +36,10 @@ class List extends Component {
     prepareListElements(contextMenuId) {
         return this.state.list.map((element, index) => (
             <div key={index}>
-                {/*<ContextMenuTrigger*/}
-                    {/*id={contextMenuId}*/}
-                    {/*collect={() => element}*/}
-                {/*>*/}
+                <ContextMenuTrigger
+                    id={contextMenuId}
+                    collect={() => element}
+                >
                     <Link to={`/note/${element.id}`}>
                         <ListElement
                             key={element.id.toString()}
@@ -41,7 +47,7 @@ class List extends Component {
                             content={element.content}
                         />
                     </Link>
-                {/*</ContextMenuTrigger>*/}
+                </ContextMenuTrigger>
             </div>
         ));
     }
@@ -59,7 +65,7 @@ class List extends Component {
         return (
             <div>
                 {0 < this.state.list.length ? listElements : noRecordsElement}
-                {/*<ContextMenu contextMenuId={contextMenuId} />*/}
+                <ContextMenu contextMenuId={contextMenuId} updateState={this.fetchListData} />
             </div>
         );
     }

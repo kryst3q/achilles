@@ -2,7 +2,7 @@
   "noRecords": "Nie odnaleziono żadnych ubiorów",
   "contextMenu": {
     "menuItem": {
-
+      "deleteNote": "Usuń notatkę"
     }
   }
 }
