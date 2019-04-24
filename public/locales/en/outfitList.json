@@ -3,6 +3,7 @@
   "contextMenu": {
     "menuItem": {
       "addToCompare": "Add to compare",
+      "deleteOutfit": "Delete",
       "removeFromCompare": "Remove from compare"
     }
   }

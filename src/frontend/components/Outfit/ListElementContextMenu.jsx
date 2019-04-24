@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContextMenu, MenuItem } from 'react-contextmenu';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const ListElementContextMenu = (props) => {
     const { contextMenuId } = props;
@@ -39,6 +40,16 @@ const ListElementContextMenu = (props) => {
         }
     }
 
+    /*
+     * TODO: add confirmation modal
+     */
+    function handleDeleteOutfit(event, data) {
+        /*
+         * TODO: add confirmation/failure info return
+         */
+        axios.delete(`/outfit/${data.id}`);
+    }
+
     return (
         <div>
             <ContextMenu id={contextMenuId} hideOnLeave={true}>
@@ -47,6 +58,9 @@ const ListElementContextMenu = (props) => {
                 </MenuItem>
                 <MenuItem onClick={handleRemoveFromCompare}>
                     { t('contextMenu.menuItem.removeFromCompare') }
+                </MenuItem>
+                <MenuItem onClick={handleDeleteOutfit}>
+                    { t('contextMenu.menuItem.deleteOutfit') }
                 </MenuItem>
             </ContextMenu>
         </div>

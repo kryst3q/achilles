@@ -14,12 +14,22 @@ module.exports = {
         OutfitId: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            unique: 'outfit_name_unique'
+            references: {
+                model: 'Outfits',
+                key: 'id'
+            },
+            unique: 'outfit_name_unique',
+            onDelete: 'CASCADE'
         },
         NameId: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            unique: 'outfit_name_unique'
+            references: {
+                model: 'Names',
+                key: 'id'
+            },
+            unique: 'outfit_name_unique',
+            onDelete: 'CASCADE'
         }
     });
   },

@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Image.associate = function(models) {
       Image.belongsTo(models.File);
-      Image.belongsToMany(models.Outfit, { through: 'OutfitsImages' });
+      Image.belongsToMany(models.Outfit, { through: 'OutfitsImages', onDelete: 'CASCADE' });
   };
 
   return Image;

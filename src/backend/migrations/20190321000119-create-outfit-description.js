@@ -25,7 +25,8 @@ module.exports = {
               model: 'Outfits',
               key: 'id'
           },
-          unique: 'outfit_description_language_unique'
+          unique: 'outfit_description_language_unique',
+          onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

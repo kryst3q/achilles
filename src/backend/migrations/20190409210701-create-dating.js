@@ -23,7 +23,8 @@ module.exports = {
               model: 'Outfits',
               key: 'id'
           },
-          unique: 'outfit_dating_unique'
+          unique: 'outfit_dating_unique',
+          onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

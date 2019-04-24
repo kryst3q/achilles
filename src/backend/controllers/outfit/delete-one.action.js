@@ -7,13 +7,13 @@ const { param, validationResult } = require('express-validator/check');
 module.exports.middlewares = [
     param('id')
         .isInt().withMessage((value, { req }) => {
-            return req.t('noteController:getOne:notInt');
+            return req.t('outfitController:getOne:notInt');
         })
         .custom((value, { req }) => {
-            return models.Note.findByPk(value)
-                .then(note => {
-                    if (!note) {
-                        return Promise.reject(req.t('noteController:getOne:notFound'));
+            return models.Outfit.findByPk(value)
+                .then(outfit => {
+                    if (!outfit) {
+                        return Promise.reject(req.t('outfitController:getOne:notFound'));
                     }
                 })
     })
@@ -30,10 +30,7 @@ module.exports.action = (req, res) => {
             });
     }
 
-    /*
-     * TODO: make this return at least status code instead of pending all the time!
-     */
-    models.Note.destroy({
+    models.Outfit.destroy({
         where: {
             id: req.params.id
         }
