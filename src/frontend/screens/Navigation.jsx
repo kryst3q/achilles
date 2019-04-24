@@ -23,7 +23,7 @@ class Navigation extends Component {
                         <IndexLinkContainer to="/notes" activeClassName="active">
                             <li>{ t('notes') }</li>
                         </IndexLinkContainer>
-                        <IndexLinkContainer to="/note" activeClassName="active">
+                        <IndexLinkContainer to="/note/0" activeClassName="active">
                             <li>{ t('note') }</li>
                         </IndexLinkContainer>
                         <IndexLinkContainer to="/outfits" activeClassName="active">
@@ -39,7 +39,7 @@ class Navigation extends Component {
 
                     <Route exact path="/" component={Home} />
                     <Route exact path="/notes" component={ScreensNoteList} />
-                    <Route exact path="/note" component={ScreensNoteEditor} />
+                    <Route exact path="/note/:noteId" component={ScreensNoteEditor} />
                     <Route exact path="/outfits" component={ScreensOutfitList} />
                     <Route exact path="/outfit" component={ScreensOutfitForm} />
                     <Route exact path="/comparision" component={ScreensComparision} />

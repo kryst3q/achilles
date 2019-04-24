@@ -30,17 +30,12 @@ module.exports.action = (req, res) => {
         content: req.body.content
     };
 
-    models.Note.findOrCreate({
-        where: {
-            id: req.body.id
-        },
-        defaults: noteData
-    })
-        .then(([note, created]) => {
-            if (created) {
-                return note;
-            } else {
+    models.Note.findByPk(req.body.id)
+        .then((note) => {
+            if (note) {
                 return note.update(noteData).then((note) => note);
+            } else {
+                return models.Note.create(noteData).then((note) => note);
             }
         })
         .then(note => {

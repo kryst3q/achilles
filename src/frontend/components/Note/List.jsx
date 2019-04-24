@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {getI18n, withTranslation} from 'react-i18next';
 import { ContextMenuTrigger } from 'react-contextmenu';
@@ -15,19 +16,7 @@ class List extends Component {
 
     componentDidMount() {
         axios
-            .get(
-                /*
-                 * TODO handle getting LanguageId
-                 */
-                '/note/list?LanguageId=' + '129',
-                /*
-                 * TODO handle strange situation where outfit lists only images because all outfits data are in pl and not in en
-                 */
-                // '/note/list?LanguageId=' + '38',
-                {
-                    headers: { 'Accept-Language': getI18n().language }
-                }
-            )
+            .get('/note/list')
             .then(res => {
                 this.setState({
                     list: res.data
@@ -41,16 +30,18 @@ class List extends Component {
     prepareListElements(contextMenuId) {
         return this.state.list.map((element, index) => (
             <div key={index}>
-                <ContextMenuTrigger
-                    id={contextMenuId}
-                    collect={() => element}
-                >
-                    <ListElement
-                        key={element.id.toString()}
-                        src={element.Images[0].File.hash}
-                        names={element.Names}
-                    />
-                </ContextMenuTrigger>
+                {/*<ContextMenuTrigger*/}
+                    {/*id={contextMenuId}*/}
+                    {/*collect={() => element}*/}
+                {/*>*/}
+                    <Link to={`/note/${element.id}`}>
+                        <ListElement
+                            key={element.id.toString()}
+                            title={element.title}
+                            content={element.content}
+                        />
+                    </Link>
+                {/*</ContextMenuTrigger>*/}
             </div>
         ));
     }
@@ -68,7 +59,7 @@ class List extends Component {
         return (
             <div>
                 {0 < this.state.list.length ? listElements : noRecordsElement}
-                <ContextMenu contextMenuId={contextMenuId} />
+                {/*<ContextMenu contextMenuId={contextMenuId} />*/}
             </div>
         );
     }

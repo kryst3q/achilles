@@ -10,9 +10,9 @@ module.exports.middlewares = [
             return req.t('noteController:getOne:notInt');
         })
         .custom((value, { req }) => {
-            return models.Outfit.findByPk(value)
-                .then(outfit => {
-                    if (!outfit) {
+            return models.Note.findByPk(value)
+                .then(note => {
+                    if (!note) {
                         return Promise.reject(req.t('noteController:getOne:notFound'));
                     }
                 })

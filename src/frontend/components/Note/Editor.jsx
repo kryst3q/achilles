@@ -6,8 +6,10 @@ import { Editor } from '@tinymce/tinymce-react';
 class NoteEditor extends Component {
     constructor(props) {
         super(props);
+        const { match: { params } } = props;
+
         this.state = {
-            id: 0,
+            id: params.noteId,
             title: '',
             content: '',
             createdAt: '',
@@ -20,7 +22,13 @@ class NoteEditor extends Component {
     }
 
     componentDidMount() {
-        // axios
+        if ('0' !== this.state.id) {
+            axios.get(`/note/${this.state.id}`)
+                .then((r) => {
+                    this.setState(r.data);
+                })
+                .catch((e) => console.log(e));
+        }
     }
 
     handleEditorChange(e) {
@@ -39,9 +47,10 @@ class NoteEditor extends Component {
         axios
             .post('/note', this.state)
             .then((r) => {
-                this.setState(r.data)
+                this.setState(r.data);
+
             })
-            .catch((e) => alert(e.data));
+            .catch((e) => console.log(e));
     }
 
     render() {
@@ -61,7 +70,7 @@ class NoteEditor extends Component {
                 </div>
                 <div>
                     <Editor
-                        initialValue={this.state.content}
+                        value={this.state.content}
                         init={{
                             plugins: 'link image code',
                             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
