@@ -1,0 +1,9 @@
+{
+  "noRecords": "Nie odnaleziono żadnych nazw",
+  "contextMenu": {
+    "menuItem": {
+      "editName": "Edytuj nazwę",
+      "deleteName": "Usuń nazwę"
+    }
+  }
+}

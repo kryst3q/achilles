@@ -1,5 +1,6 @@
 'use strict';
 
+const deleteOne = require('./delete-one.action.js');
 const getAll = require('./get-all.action.js');
 const getOne = require('./get-one.action.js');
 const getSearch = require('./get-search.action.js');
@@ -25,6 +26,11 @@ module.exports = {
         }
     },
     '/:id': {
+        delete: {
+            middlewares: deleteOne.middlewares,
+            action: deleteOne.action,
+            level: 'public'
+        },
         get: {
             action: getOne.action,
             level: 'public'

@@ -1,0 +1,9 @@
+{
+  "noRecords": "No records found",
+  "contextMenu": {
+    "menuItem": {
+      "editName": "Edit name",
+      "deleteNote": "Delete name"
+    }
+  }
+}

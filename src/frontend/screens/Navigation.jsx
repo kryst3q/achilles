@@ -8,6 +8,7 @@ import ScreensOutfitForm from '../screens/Outfit/Form';
 import ScreensNoteList from '../screens/Note/List';
 import ScreensNoteEditor from '../screens/Note/Editor';
 import ScreensComparision from '../screens/UI/Comparision';
+import ScreensNameList from '../screens/Name/List';
 
 class Navigation extends Component {
     render() {
@@ -32,6 +33,9 @@ class Navigation extends Component {
                         <IndexLinkContainer to="/outfit" activeClassName="active">
                             <li>{ t('outfit') }</li>
                         </IndexLinkContainer>
+                        <IndexLinkContainer to="/names" activeClassName="active">
+                            <li>{ t('names') }</li>
+                        </IndexLinkContainer>
                         <IndexLinkContainer to="/comparision" activeClassName="active">
                             <li>{ t('comparision') }</li>
                         </IndexLinkContainer>
@@ -43,6 +47,7 @@ class Navigation extends Component {
                     <Route exact path="/outfits" component={ScreensOutfitList} />
                     <Route exact path="/outfit" component={ScreensOutfitForm} />
                     <Route exact path="/comparision" component={ScreensComparision} />
+                    <Route exact path="/names" component={ScreensNameList} />
                 </div>
             </Router>
         );

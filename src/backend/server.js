@@ -24,7 +24,8 @@ i18next
         ns: [
             'outfitController',
             'languageController',
-            'noteController'
+            'noteController',
+            'nameController',
         ],
         backend: {
             loadPath: path.join(__dirname, '..', '..', 'public', 'locales', '{{lng}}', '{{ns}}.json')

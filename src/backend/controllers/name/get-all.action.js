@@ -2,20 +2,17 @@
 
 const path = require('path');
 const models = require(path.join(__dirname, '..', '..', 'models'));
-const Op = models.sequelize.Op;
 
 module.exports.action = (req, res) => {
     models.Name.findAll({
         where: {
-            LanguageId: {
-                [Op.eq]: req.param.langId
-            }
+            LanguageId: req.query.LanguageId
         }
     })
-        .then(outfits => {
+        .then(names => {
             res
                 .status(200)
-                .json(outfits)
+                .json(names)
             ;
         })
         .catch(error => {

@@ -12,7 +12,6 @@
 * write tests to recent components
 * write test to electron app
 * add screens for list elements !!!
-* handle saving new names
 * handle managing names
 * handle managing images
 
@@ -28,6 +27,7 @@
 * add Note list component
 * add Note list element component
 * handle cascade delete in outfit
+* handle saving new names
 
 ## NO
 * form validation
