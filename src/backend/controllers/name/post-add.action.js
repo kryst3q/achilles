@@ -4,7 +4,7 @@ const path = require('path');
 const models = require(path.join(__dirname, '..', '..', 'models'));
 
 module.exports.action = (req, res) => {
-    models.Name.create(req.data)
+    models.Name.create(req.body)
         .then(name => {
             res
                 .status(201)

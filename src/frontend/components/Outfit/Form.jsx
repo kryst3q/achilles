@@ -13,7 +13,6 @@ class Form extends Component {
             description: '',
             foundNames: [],
             isSubmitting: false,
-            newNames: [],
             Language: {}
         };
 
@@ -48,18 +47,20 @@ class Form extends Component {
     }
 
     handleNameCreate(name) {
-        let Names = this.state.Names;
-        let newNames = this.state.newNames;
-        let newOption = {
-            id: Names.length,
+        let newName = {
             displayValue: name,
-            searchName: name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+            searchValue: name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
+            LanguageId: this.state.Language.id
         };
 
-        this.setState({
-            Names: [...Names, newOption],
-            newNames: [...newNames, newOption]
-        })
+        axios.post('/name', newName)
+            .then(r => {
+                this.setState({
+                    Names: [...this.state.Names, r.data],
+                    foundNames: [...this.state.foundNames, r.data]
+                })
+            })
+            .catch(e => console.log(e));
     }
 
     handleNameSearch(name) {
@@ -90,8 +91,6 @@ class Form extends Component {
 
         let files = this.imageFileInput.current.files;
         let promises = [];
-
-        /* TODO handle saving new names!!! */
 
         Array.from(files).map(file => promises.push(
                 new Promise(function (resolve, reject) {
