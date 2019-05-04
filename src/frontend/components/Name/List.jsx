@@ -12,10 +12,11 @@ class List extends Component {
             list: []
         };
 
-        this.elementReadToggle = this.elementReadToggle.bind(this);
+        this.makeElementEditable = this.makeElementEditable.bind(this);
         this.fetchListData = this.fetchListData.bind(this);
         this.handleElementChange = this.handleElementChange.bind(this);
-        this.handleUpdateElement = this.handleUpdateElement.bind(this);
+        this.handleElementDelete = this.handleElementDelete.bind(this);
+        this.handleElementUpdate = this.handleElementUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -40,15 +41,17 @@ class List extends Component {
             });
     }
 
-    elementReadToggle(event) {
+    makeElementEditable(event) {
         const index = Number(event.target.previousElementSibling.dataset.index);
         let list = this.state.list;
 
-        list[index].readOnly = !list[index].readOnly;
+        if (list[index].readOnly) {
+            list[index].readOnly = false;
 
-        this.setState({
-            list: list
-        });
+            this.setState({
+                list: list
+            });
+        } 
     }
 
     handleElementChange(event) {
@@ -65,12 +68,32 @@ class List extends Component {
         });
     }
 
-    handleUpdateElement(event) {
+    handleElementDelete(event) {
+        console.log(event);
+        // const element = event.target.previousElementSibling.previousElementSibling;
+        // const id = element.dataset.id;
+        // const index = Number(element.dataset.index);
+        // let list = this.state.list;
+        //
+        // axios.delete('/name/' + id)
+        //     .then((r) => {
+        //         if (r.data.result === 1) {
+        //             list.splice(index, 1);
+        //
+        //             this.setState({
+        //                 list: list
+        //             });
+        //         }
+        //     })
+        //     .catch((e) => console.log(e));
+    }
+
+    handleElementUpdate(event) {
         const index = Number(event.target.previousElementSibling.dataset.index);
         let list = this.state.list;
         const element = list[index];
 
-        axios.put('/name/' + element.id, element)
+        axios.put(`/name/${element.id}`, element)
             .then((r) => {
                 list[index].modified = false;
                 list[index].readOnly = true;
@@ -98,12 +121,14 @@ class List extends Component {
                         data-id={element.id}
                         data-index={index}
                         onChange={this.handleElementChange}
+                        onDoubleClick={this.makeElementEditable}
                     />
                     {
-                        element.readOnly ?
-                            <button onClick={this.elementReadToggle}>edytuj</button>
+                        !element.readOnly && element.modified
+                            ?
+                            <button onClick={this.handleElementUpdate}>zapisz</button>
                             :
-                            <button onClick={this.handleUpdateElement}>zapisz</button>
+                            ''
                     }
                 </ContextMenuTrigger>
             </div>

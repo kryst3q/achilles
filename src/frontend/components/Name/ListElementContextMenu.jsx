@@ -4,31 +4,19 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 const ListElementContextMenu = (props) => {
-    const { contextMenuId, fetchListData, elementReadToggle } = props;
+    const { contextMenuId, fetchListData } = props;
     const { t, i18n } = useTranslation('nameList');
 
-    /*
-     * TODO: add confirmation modal
-     */
-    function handleDeleteElement(event, data) {
-        axios.delete(`/name/${data.id}`);
-        /*
-         * TODO: make all context menus rerender their parent components!
-         */
-        fetchListData();
+    function onNameDelete(event, data) {
+        axios.delete(`/name/${data.id}`)
+            .then((r) => fetchListData())
+            .catch((e) => console.log(e));
     }
-
-    // function handleEditElement(event, data) {
-    //     elementReadToggle(data.id);
-    // }
 
     return (
         <div>
             <ContextMenu id={contextMenuId} hideOnLeave={true}>
-                {/*<MenuItem onClick={handleEditElement}>*/}
-                    {/*{ t('contextMenu.menuItem.editName') }*/}
-                {/*</MenuItem>*/}
-                <MenuItem onClick={handleDeleteElement}>
+                <MenuItem onClick={onNameDelete}>
                     { t('contextMenu.menuItem.deleteName') }
                 </MenuItem>
             </ContextMenu>

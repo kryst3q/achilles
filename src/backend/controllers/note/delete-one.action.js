@@ -30,14 +30,11 @@ module.exports.action = (req, res) => {
             });
     }
 
-    /*
-     * TODO: make this return at least status code instead of pending all the time!
-     */
     models.Note.destroy({
         where: {
             id: req.params.id
         }
     })
-        .then(() => res.status(202))
+        .then((result) => res.status(202).json({ result: result }))
         .catch(err => res.status(400).json(err));
 };

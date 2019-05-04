@@ -11,11 +11,12 @@ const ListElementContextMenu = (props) => {
      * TODO: add confirmation modal
      */
     function handleDeleteNote(event, data) {
-        axios.delete(`/note/${data.id}`);
-        /*
-         * TODO: make all context menus rerender their parent components!
-         */
-        updateState();
+        axios.delete(`/note/${data.id}`)
+            .then((r) => {
+                if (r.data.result === 1) {
+                    updateState();
+                }
+            })
     }
 
     return (

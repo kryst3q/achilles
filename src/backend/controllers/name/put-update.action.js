@@ -15,10 +15,10 @@ module.exports.action = (req, res) => {
             }
         }
     )
-        .then(name => {
+        .then(result => {
             res
                 .status(201)
-                .json(name);
+                .json({ result: result });
         })
         .catch(e => {
             res
