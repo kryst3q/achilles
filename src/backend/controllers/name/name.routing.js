@@ -5,6 +5,7 @@ const getAll = require('./get-all.action.js');
 const getOne = require('./get-one.action.js');
 const getSearch = require('./get-search.action.js');
 const postAdd = require('./post-add.action.js');
+const putUpdate = require('./put-update.action.js');
 
 module.exports = {
     '/': {
@@ -33,6 +34,10 @@ module.exports = {
         },
         get: {
             action: getOne.action,
+            level: 'public'
+        },
+        put: {
+            action: putUpdate.action,
             level: 'public'
         }
     }

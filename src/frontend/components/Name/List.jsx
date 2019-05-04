@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withTranslation } from 'react-i18next';
 import { ContextMenuTrigger } from 'react-contextmenu';
 import ContextMenu from './ListElementContextMenu';
+import { formatToSearchValue } from '../Helpers';
 
 class List extends Component {
     constructor(props) {
@@ -39,15 +40,11 @@ class List extends Component {
             });
     }
 
-    elementReadToggle(id) {
+    elementReadToggle(event) {
+        const index = Number(event.target.previousElementSibling.dataset.index);
         let list = this.state.list;
-        list = list.map((element) => {
-            if (id === element.id) {
-                element.readOnly = !element.readOnly;
-            }
 
-            return element;
-        });
+        list[index].readOnly = !list[index].readOnly;
 
         this.setState({
             list: list
@@ -55,23 +52,34 @@ class List extends Component {
     }
 
     handleElementChange(event) {
+        const index = Number(event.target.dataset.index);
+        const newDisplayValue = event.target.value;
         let list = this.state.list;
-        list = list.map((element) => {
-            if (element.id == event.target.dataset.id) {
-                element.displayValue = event.target.value;
-                element.modified = true;
-            }
 
-            return element;
-        });
+        list[index].displayValue = newDisplayValue;
+        list[index].modified = true;
+        list[index].searchValue = formatToSearchValue(newDisplayValue);
 
         this.setState({
             list: list
         });
     }
 
-    handleUpdateElement(element) {
-        console.log(element);
+    handleUpdateElement(event) {
+        const index = Number(event.target.previousElementSibling.dataset.index);
+        let list = this.state.list;
+        const element = list[index];
+
+        axios.put('/name/' + element.id, element)
+            .then((r) => {
+                list[index].modified = false;
+                list[index].readOnly = true;
+
+                this.setState({
+                    list: list
+                });
+            })
+            .catch((e) => console.log(e));
     }
 
     prepareListElements(contextMenuId) {
@@ -93,9 +101,9 @@ class List extends Component {
                     />
                     {
                         element.readOnly ?
-                            <button onClick={this.elementReadToggle(element.id)}>edytuj</button>
+                            <button onClick={this.elementReadToggle}>edytuj</button>
                             :
-                            <button onClick={this.handleUpdateElement(element)}>zapisz</button>
+                            <button onClick={this.handleUpdateElement}>zapisz</button>
                     }
                 </ContextMenuTrigger>
             </div>

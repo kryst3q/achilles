@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DateTimePicker, Multiselect } from 'react-widgets';
 import axios from 'axios';
 import { withTranslation, getI18n } from 'react-i18next';
+import { formatToSearchValue } from '../Helpers';
 
 class Form extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class Form extends Component {
     handleNameCreate(name) {
         let newName = {
             displayValue: name,
-            searchValue: name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
+            searchValue: formatToSearchValue(name),
             LanguageId: this.state.Language.id
         };
 
