@@ -12,8 +12,9 @@
 * write tests to recent components
 * write test to electron app
 * add screens for list elements !!!
-* handle managing names
 * handle managing images
+? make express backend typescript (sequelize included)
+? divide frontend & backend into separate repos
 
 ## DONE
 * add File model
@@ -28,6 +29,7 @@
 * add Note list element component
 * handle cascade delete in outfit
 * handle saving new names
+* handle managing names
 
 ## NO
 * form validation

@@ -4,26 +4,33 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 const ListElementContextMenu = (props) => {
-    const { contextMenuId, updateState } = props;
-    const { t, i18n } = useTranslation('noteList');
+    const { contextMenuId, fetchListData } = props;
+    const { t, i18n } = useTranslation('imageList');
 
     /*
      * TODO: add confirmation modal
      */
-    function handleDeleteNote(event, data) {
-        axios.delete(`/note/${data.id}`)
+    function handleDelete(event, data) {
+        axios.delete(`/image/${data.id}`)
             .then((r) => {
                 if (r.data.result === 1) {
-                    updateState();
+                    fetchListData();
                 }
             })
+    }
+
+    function handleEdit(event, data) {
+
     }
 
     return (
         <div>
             <ContextMenu id={contextMenuId} hideOnLeave={true}>
-                <MenuItem onClick={handleDeleteNote}>
+                <MenuItem onClick={handleDelete}>
                     { t('contextMenu.menuItem.delete') }
+                </MenuItem>
+                <MenuItem onClick={handleEdit}>
+                    { t('contextMenu.menuItem.edit') }
                 </MenuItem>
             </ContextMenu>
         </div>

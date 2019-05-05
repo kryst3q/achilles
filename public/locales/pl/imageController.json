@@ -1,0 +1,6 @@
+{
+  "getOne": {
+    "notFound": "Nie odnaleziono obrazu o podanym identyfikatorze",
+    "notInt": "Podany identyfikator obrazu nie jest liczbą"
+  }
+}

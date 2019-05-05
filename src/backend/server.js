@@ -25,6 +25,7 @@ i18next
             'outfitController',
             'languageController',
             'noteController',
+            'imageController',
             'nameController',
         ],
         backend: {

@@ -8,7 +8,7 @@ const ListElement = (props) => {
                     /*
                      * TODO handle preparing path to images (global const?)
                      */
-                    src={'uploads/' + props.src}
+                    src={`uploads/${props.src}`}
                     height={150}
                 />
             </div>

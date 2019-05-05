@@ -2,7 +2,7 @@
   "noRecords": "No records found",
   "contextMenu": {
     "menuItem": {
-      "deleteNote": "Delete note"
+      "delete": "Delete note"
     }
   }
 }

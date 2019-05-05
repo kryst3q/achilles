@@ -9,6 +9,7 @@ import ScreensNoteList from '../screens/Note/List';
 import ScreensNoteEditor from '../screens/Note/Editor';
 import ScreensComparision from '../screens/UI/Comparision';
 import ScreensNameList from '../screens/Name/List';
+import ScreensImageList from '../screens/Image/List';
 
 class Navigation extends Component {
     render() {
@@ -36,6 +37,12 @@ class Navigation extends Component {
                         <IndexLinkContainer to="/names" activeClassName="active">
                             <li>{ t('names') }</li>
                         </IndexLinkContainer>
+                        <IndexLinkContainer to="/images" activeClassName="active">
+                            <li>{ t('images') }</li>
+                        </IndexLinkContainer>
+                        {/*<IndexLinkContainer to="/image/0" activeClassName="active">*/}
+                            {/*<li>{ t('image') }</li>*/}
+                        {/*</IndexLinkContainer>*/}
                         <IndexLinkContainer to="/comparision" activeClassName="active">
                             <li>{ t('comparision') }</li>
                         </IndexLinkContainer>
@@ -48,6 +55,8 @@ class Navigation extends Component {
                     <Route exact path="/outfit" component={ScreensOutfitForm} />
                     <Route exact path="/comparision" component={ScreensComparision} />
                     <Route exact path="/names" component={ScreensNameList} />
+                    <Route exact path="/images" component={ScreensImageList} />
+                    {/*<Route exact path="/image/:imageId" component={} />*/}
                 </div>
             </Router>
         );

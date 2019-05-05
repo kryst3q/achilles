@@ -1,8 +1,8 @@
 {
-  "noRecords": "Nie odnaleziono żadnych ubiorów",
+  "noRecords": "Nie odnaleziono żadnych notatek",
   "contextMenu": {
     "menuItem": {
-      "deleteNote": "Usuń notatkę"
+      "delete": "Usuń notatkę"
     }
   }
 }

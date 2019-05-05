@@ -1,0 +1,10 @@
+{
+  "noRecords": "Nie odnaleziono żadnych obrazów",
+  "contextMenu": {
+    "menuItem": {
+      "delete": "Usuń obraz",
+      "edit": "Edytuj obraz",
+      "update": "Zapisz zmiany"
+    }
+  }
+}

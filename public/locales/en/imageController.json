@@ -1,0 +1,6 @@
+{
+  "getOne": {
+    "notFound": "Image with given identifier not found",
+    "notInt": "Given image's identifier is not integer"
+  }
+}

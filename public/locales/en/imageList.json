@@ -1,0 +1,10 @@
+{
+  "noRecords": "No records found",
+  "contextMenu": {
+    "menuItem": {
+      "delete": "Delete image",
+      "edit": "Edit image",
+      "update": "Save changes"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const Image = sequelize.define('Image', {
       id : {
@@ -6,10 +7,12 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true
       },
+      /* TODO: make table/tables? to store translated ?name & description */
       name: {
           type: DataTypes.STRING,
           allowNull: true
       },
+      /* ?TODO: make "people" table and store in this attributes people id */
       author: {
           type: DataTypes.STRING,
           allowNull: true
@@ -18,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: true
       },
+      /* TODO: make "place" table and store in this attributes place id */
       storingPlace: {
           type: DataTypes.STRING,
           allowNull: true
