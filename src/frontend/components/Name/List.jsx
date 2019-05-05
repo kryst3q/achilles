@@ -14,6 +14,9 @@ class List extends Component {
 
         this.makeElementEditable = this.makeElementEditable.bind(this);
         this.fetchListData = this.fetchListData.bind(this);
+        this.deleteElement = this.deleteElement.bind(this);
+        this.editElement = this.editElement.bind(this);
+        this.updateElement = this.updateElement.bind(this);
         this.handleElementChange = this.handleElementChange.bind(this);
         this.handleElementDelete = this.handleElementDelete.bind(this);
         this.handleElementUpdate = this.handleElementUpdate.bind(this);
@@ -43,15 +46,8 @@ class List extends Component {
 
     makeElementEditable(event) {
         const index = Number(event.target.previousElementSibling.dataset.index);
-        let list = this.state.list;
 
-        if (list[index].readOnly) {
-            list[index].readOnly = false;
-
-            this.setState({
-                list: list
-            });
-        } 
+        this.editElement(index);
     }
 
     handleElementChange(event) {
@@ -69,40 +65,16 @@ class List extends Component {
     }
 
     handleElementDelete(event) {
-        console.log(event);
-        // const element = event.target.previousElementSibling.previousElementSibling;
-        // const id = element.dataset.id;
-        // const index = Number(element.dataset.index);
-        // let list = this.state.list;
-        //
-        // axios.delete('/name/' + id)
-        //     .then((r) => {
-        //         if (r.data.result === 1) {
-        //             list.splice(index, 1);
-        //
-        //             this.setState({
-        //                 list: list
-        //             });
-        //         }
-        //     })
-        //     .catch((e) => console.log(e));
+        const input = event.target.previousElementSibling.previousElementSibling;
+        const index = Number(input.dataset.index);
+
+        this.deleteElement(index);
     }
 
     handleElementUpdate(event) {
         const index = Number(event.target.previousElementSibling.dataset.index);
-        let list = this.state.list;
-        const element = list[index];
 
-        axios.put(`/name/${element.id}`, element)
-            .then((r) => {
-                list[index].modified = false;
-                list[index].readOnly = true;
-
-                this.setState({
-                    list: list
-                });
-            })
-            .catch((e) => console.log(e));
+        this.updateElement(index);
     }
 
     prepareListElements(contextMenuId) {
@@ -112,7 +84,7 @@ class List extends Component {
             <div key={index}>
                 <ContextMenuTrigger
                     id={contextMenuId}
-                    collect={() => element}
+                    collect={() => ({ index: index })}
                 >
                     <input
                         type='text'
@@ -139,6 +111,53 @@ class List extends Component {
         return <span>{ t('nameList:noRecords') }</span>;
     }
 
+    deleteElement(index) {
+        let list = this.state.list;
+        const element = list[index];
+
+        axios.delete(`/name/${element.id}`)
+            .then((r) => {
+                if (r.data.result === 1) {
+                    list.splice(index, 1);
+
+                    this.setState({
+                        list: list
+                    });
+                }
+            })
+            .catch((e) => console.log(e));
+    }
+
+    editElement(index) {
+        let list = this.state.list;
+
+        if (list[index].readOnly) {
+            list[index].readOnly = false;
+
+            this.setState({
+                list: list
+            });
+        }
+    }
+
+    updateElement(index) {
+        let list = this.state.list;
+        const element = list[index];
+
+        if (!element.readOnly && element.modified) {
+            axios.put(`/name/${element.id}`, element)
+                .then((r) => {
+                    list[index].modified = false;
+                    list[index].readOnly = true;
+
+                    this.setState({
+                        list: list
+                    });
+                })
+                .catch((e) => console.log(e));
+        }
+    }
+
     render() {
         const { t } = this.props;
         const contextMenuId = 'nameListElementContextMenu';
@@ -150,7 +169,9 @@ class List extends Component {
                 {0 < this.state.list.length ? listElements : noRecordsElement}
                 <ContextMenu
                     contextMenuId={contextMenuId}
-                    fetchListData={this.fetchListData}
+                    deleteElement={this.deleteElement}
+                    editElement={this.editElement}
+                    updateElement={this.updateElement}
                 />
             </div>
         );
