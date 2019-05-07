@@ -52,6 +52,19 @@ class Form extends Component {
             isSubmitting: true
         });
 
+        axios.put(`/image/${this.state.id}`, this.state)
+            .then(res => {
+                // TODO redirect to list
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                this.setState({
+                    isSubmitting: false
+                })
+            });
+
         // let files = this.imageFileInput.current.files;
         // let promises = [];
         //

@@ -1,0 +1,26 @@
+{
+  "author": {
+    "label": "Autor"
+  },
+  "originDate": {
+    "label": "Data wykonania"
+  },
+  "originPlace": {
+    "label": "Miejsce wykonania"
+  },
+  "storingPlace": {
+    "label": "Miejsce przechowywania"
+  },
+  "description": {
+    "label": "Opis"
+  },
+  "image": {
+    "label": "Grafika"
+  },
+  "name": {
+    "label": "Nazwa"
+  },
+  "submit": {
+    "label": "Zapisz"
+  }
+}

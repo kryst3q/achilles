@@ -1,0 +1,26 @@
+{
+  "author": {
+    "label": "Author"
+  },
+  "originDate": {
+    "label": "Origin date"
+  },
+  "originPlace": {
+    "label": "Origin place"
+  },
+  "storingPlace": {
+    "label": "Storing place"
+  },
+  "description": {
+    "label": "Description"
+  },
+  "image": {
+    "label": "Image"
+  },
+  "name": {
+    "label": "Name"
+  },
+  "submit": {
+    "label": "Save"
+  }
+}
