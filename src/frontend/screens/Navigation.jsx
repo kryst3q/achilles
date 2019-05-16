@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import { IndexLinkContainer } from 'react-router-bootstrap';
 import { withTranslation } from 'react-i18next';
 import Home from '../components/Home/Home';
-import ScreensOutfitList from '../screens/Outfit/List';
-import ScreensOutfitForm from '../screens/Outfit/Form';
-import ScreensNoteList from '../screens/Note/List';
-import ScreensNoteEditor from '../screens/Note/Editor';
-import ScreensComparision from '../screens/UI/Comparision';
-import ScreensNameList from '../screens/Name/List';
-import ScreensImageList from '../screens/Image/List';
-import ScreensImageForm from '../screens/Image/Form';
+import OutfitList from '../components/Outfit/List';
+import OutfitForm from '../components/Outfit/Form';
+import NoteList from '../components/Note/List';
+import NoteEditor from '../components/Note/Editor';
+import Comparision from '../components/UI/Comparision/Comparision';
+import NameList from '../components/Name/List';
+import ImageList from '../components/Image/List';
+import ImageForm from '../components/Image/Form';
 
 class Navigation extends Component {
     render() {
@@ -19,42 +19,48 @@ class Navigation extends Component {
         return (
             <Router>
                 <div>
-                    <ul>
+                    <div>
                         <IndexLinkContainer to="/" activeClassName="active">
-                            <li>{ t('workspace') }</li>
+                            <img src={require('../assets/navbar/home.svg')} title={ t('workspace') } height={50} />
                         </IndexLinkContainer>
+                    </div>
+                    <div>
                         <IndexLinkContainer to="/notes" activeClassName="active">
-                            <li>{ t('notes') }</li>
+                            <img src={require('../assets/navbar/notes.svg')} title={ t('notes') } height={50} />
                         </IndexLinkContainer>
+                    </div>
+                    <div>
                         <IndexLinkContainer to="/note/0" activeClassName="active">
-                            <li>{ t('note') }</li>
+                            <img src={require('../assets/navbar/note.svg')} title={ t('note') } height={50} />
                         </IndexLinkContainer>
+                    </div>
+                    <div>
                         <IndexLinkContainer to="/outfits" activeClassName="active">
-                            <li>{ t('outfits') }</li>
+                            <img src={require('../assets/navbar/outfit.svg')} title={ t('outfits') } height={50}/>
                         </IndexLinkContainer>
-                        <IndexLinkContainer to="/outfit" activeClassName="active">
-                            <li>{ t('outfit') }</li>
-                        </IndexLinkContainer>
-                        <IndexLinkContainer to="/names" activeClassName="active">
-                            <li>{ t('names') }</li>
-                        </IndexLinkContainer>
-                        <IndexLinkContainer to="/images" activeClassName="active">
-                            <li>{ t('images') }</li>
-                        </IndexLinkContainer>
-                        <IndexLinkContainer to="/comparision" activeClassName="active">
-                            <li>{ t('comparision') }</li>
-                        </IndexLinkContainer>
-                    </ul>
+                    </div>
+                    {/*<IndexLinkContainer to="/outfit" activeClassName="active">*/}
+                        {/*<li>{ t('outfit') }</li>*/}
+                    {/*</IndexLinkContainer>*/}
+                    {/*<IndexLinkContainer to="/names" activeClassName="active">*/}
+                        {/*<li>{ t('names') }</li>*/}
+                    {/*</IndexLinkContainer>*/}
+                    {/*<IndexLinkContainer to="/images" activeClassName="active">*/}
+                        {/*<li>{ t('images') }</li>*/}
+                    {/*</IndexLinkContainer>*/}
+                    {/*<IndexLinkContainer to="/comparision" activeClassName="active">*/}
+                        {/*<li>{ t('comparision') }</li>*/}
+                    {/*</IndexLinkContainer>*/}
 
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/notes" component={ScreensNoteList} />
-                    <Route exact path="/note/:noteId" component={ScreensNoteEditor} />
-                    <Route exact path="/outfits" component={ScreensOutfitList} />
-                    <Route exact path="/outfit" component={ScreensOutfitForm} />
-                    <Route exact path="/comparision" component={ScreensComparision} />
-                    <Route exact path="/names" component={ScreensNameList} />
-                    <Route exact path="/images" component={ScreensImageList} />
-                    <Route exact path="/image/:imageId" component={ScreensImageForm} />
+                    <Route exact path="/notes" component={NoteList} />
+                    <Route exact path="/note/:noteId" component={NoteEditor} />
+                    <Route exact path="/outfits" component={OutfitList} />
+                    <Route exact path="/outfit" component={OutfitForm} />
+                    <Route exact path="/comparision" component={Comparision} />
+                    <Route exact path="/names" component={NameList} />
+                    <Route exact path="/images" component={ImageList} />
+                    <Route exact path="/image/:imageId" component={ImageForm} />
                 </div>
             </Router>
         );
