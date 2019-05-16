@@ -1,9 +1,9 @@
 import React from 'react';
 import ImageList from '../../components/Image/List';
 
-const ScreensImageList = () => (
+const ScreensImageList = (props) => (
     <div className="workbench">
-        <ImageList/>
+        <ImageList history={props.history}/>
     </div>
 );
 

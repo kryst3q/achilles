@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 const ListElementContextMenu = (props) => {
-    const { contextMenuId, fetchListData } = props;
+    const { contextMenuId, fetchListData, history } = props;
     const { t, i18n } = useTranslation('imageList');
 
     /*
@@ -20,7 +20,8 @@ const ListElementContextMenu = (props) => {
     }
 
     function handleEdit(event, data) {
-
+        console.log(history);
+        history.push(`/image/${data.id}`);
     }
 
     return (

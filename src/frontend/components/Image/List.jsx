@@ -65,7 +65,11 @@ class List extends Component {
         return (
             <div>
                 {0 < this.state.list.length ? listElements : noRecordsElement}
-                <ContextMenu contextMenuId={contextMenuId} fetchListData={this.fetchListData} />
+                <ContextMenu
+                    contextMenuId={contextMenuId}
+                    fetchListData={this.fetchListData}
+                    history={this.props.history}
+                />
             </div>
         );
     }
