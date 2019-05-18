@@ -9,6 +9,9 @@ const bodyParser = require('body-parser');
 const i18next = require("i18next");
 const i18nextMiddleware = require('i18next-express-middleware');
 const i18nextBackend = require('i18next-node-fs-backend');
+const bootstrap = require(path.join(__dirname, 'services', 'bootstrap.js'));
+
+bootstrap.prepare();
 
 /*
  * TODO move i18next config to separate file
