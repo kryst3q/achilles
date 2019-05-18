@@ -15,42 +15,83 @@ import ImageForm from '../components/Image/Form';
 class Navigation extends Component {
     render() {
         const {t} = this.props;
+        const navbarIconHeight = 50;
 
         return (
             <Router>
                 <div>
                     <div>
                         <IndexLinkContainer to="/" activeClassName="active">
-                            <img src={require('../assets/navbar/home.svg')} title={ t('workspace') } height={50} />
+                            <img
+                                src={require('../assets/navbar/home.svg')}
+                                title={ t('workspace') }
+                                height={navbarIconHeight}
+                            />
                         </IndexLinkContainer>
                     </div>
                     <div>
                         <IndexLinkContainer to="/notes" activeClassName="active">
-                            <img src={require('../assets/navbar/notes.svg')} title={ t('notes') } height={50} />
+                            <img
+                                src={require('../assets/navbar/notes.svg')}
+                                title={ t('notes') }
+                                height={navbarIconHeight}
+                            />
                         </IndexLinkContainer>
                     </div>
                     <div>
                         <IndexLinkContainer to="/note/0" activeClassName="active">
-                            <img src={require('../assets/navbar/note.svg')} title={ t('note') } height={50} />
+                            <img
+                                src={require('../assets/navbar/note.svg')}
+                                title={ t('note') }
+                                height={navbarIconHeight}
+                            />
                         </IndexLinkContainer>
                     </div>
                     <div>
                         <IndexLinkContainer to="/outfits" activeClassName="active">
-                            <img src={require('../assets/navbar/outfit.svg')} title={ t('outfits') } height={50}/>
+                            <img
+                                src={require('../assets/navbar/outfits.svg')}
+                                title={ t('outfits') }
+                                height={navbarIconHeight}
+                            />
                         </IndexLinkContainer>
                     </div>
-                    {/*<IndexLinkContainer to="/outfit" activeClassName="active">*/}
-                        {/*<li>{ t('outfit') }</li>*/}
-                    {/*</IndexLinkContainer>*/}
-                    {/*<IndexLinkContainer to="/names" activeClassName="active">*/}
-                        {/*<li>{ t('names') }</li>*/}
-                    {/*</IndexLinkContainer>*/}
-                    {/*<IndexLinkContainer to="/images" activeClassName="active">*/}
-                        {/*<li>{ t('images') }</li>*/}
-                    {/*</IndexLinkContainer>*/}
-                    {/*<IndexLinkContainer to="/comparision" activeClassName="active">*/}
-                        {/*<li>{ t('comparision') }</li>*/}
-                    {/*</IndexLinkContainer>*/}
+                    <div>
+                        <IndexLinkContainer to="/outfit" activeClassName="active">
+                            <img
+                                src={require('../assets/navbar/outfit.svg')}
+                                title={ t('outfit') }
+                                height={navbarIconHeight}
+                            />
+                        </IndexLinkContainer>
+                    </div>
+                    <div>
+                        <IndexLinkContainer to="/names" activeClassName="active">
+                            <img
+                                src={require('../assets/navbar/names.svg')}
+                                title={ t('names') }
+                                height={navbarIconHeight}
+                            />
+                        </IndexLinkContainer>
+                    </div>
+                    <div>
+                        <IndexLinkContainer to="/images" activeClassName="active">
+                            <img
+                                src={require('../assets/navbar/images.svg')}
+                                title={ t('images') }
+                                height={navbarIconHeight}
+                            />
+                        </IndexLinkContainer>
+                    </div>
+                    <div>
+                        <IndexLinkContainer to="/comparision" activeClassName="active">
+                            <img
+                                src={require('../assets/navbar/comparision.svg')}
+                                title={ t('comparision') }
+                                height={navbarIconHeight}
+                            />
+                        </IndexLinkContainer>
+                    </div>
 
                     <Route exact path="/" component={Home} />
                     <Route exact path="/notes" component={NoteList} />
