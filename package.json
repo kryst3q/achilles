@@ -44,6 +44,7 @@
     "sequelize-cli": "^5.4.0",
     "sortablejs": "^1.6.1",
     "sqlite3": "^4.0.6",
+    "styled-components": "^4.2.0",
     "use-react-router": "^1.0.6"
   },
   "devDependencies": {
@@ -53,6 +54,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-styled-components": "^1.10.0",
     "css-loader": "^2.1.0",
     "electron": "^4.0.5",
     "electron-react-devtools": "^0.5.3",
