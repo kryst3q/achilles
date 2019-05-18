@@ -5,7 +5,12 @@ import styled from 'styled-components';
 
 const StyledNavlink = styled('div')`
 	border: 1px solid black;
-	width: 50px;
+	border-radius: 5px;
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+	margin-bottom: 5px;
+	padding: 4px;
 `;
 
 const Navlink = (props) => {

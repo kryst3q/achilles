@@ -13,8 +13,9 @@ import ImageForm from "../../Image/Form";
 
 const StyledContent = styled('div')`
     float: left;
-    height: 90%;
+    height: 100%;
     width: 90%;
+    padding: 10px;
 `;
 
 const Content = () => {

@@ -4,9 +4,11 @@ import styled from "styled-components";
 
 const StyledNavbar = styled('div')`
 	float: left;
-	height: 90%;
-	width: 10%;
+	width: 70px;
+	height: 100%;
 	padding: 5px;
+	background-color: #eceff1;
+	border-right: 1px solid #b0bec5;
 `;
 
 const Navbar = () => {
