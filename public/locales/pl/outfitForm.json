@@ -1,5 +1,6 @@
 {
   "dating": {
+    "label": "Datowanie",
     "start": {
       "label": "Od"
     },
@@ -17,6 +18,6 @@
     "label": "Nazwy"
   },
   "submit": {
-    "label": "Wyślij"
+    "label": "Zapisz"
   }
 }

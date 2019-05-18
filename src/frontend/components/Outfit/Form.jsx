@@ -3,6 +3,9 @@ import { DateTimePicker, Multiselect } from 'react-widgets';
 import axios from 'axios';
 import { withTranslation, getI18n } from 'react-i18next';
 import { formatToSearchValue } from '../Helpers';
+import Label from "../UI/Form/Label";
+import styled from "styled-components";
+import TextInput from "../UI/Form/TextInput";
 
 class Form extends Component {
     constructor(props) {
@@ -138,14 +141,23 @@ class Form extends Component {
 
     render() {
         const { t } = this.props;
+        const InputGroup = styled.div`
+            width: 100%;
+            margin-bottom: 10px;
+        `;
+        const SubmitButton = styled.button`
+            background-color: lightgreen;
+        `;
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label htmlFor='names'>{ t('outfitForm:name.label') }</label>
+                <InputGroup>
+                    <Label htmlFor='names'>{ t('outfitForm:name.label') }</Label>
                     <Multiselect
                         id='names'
                         name='Names'
+                        // messages={} TODO
+                        style={{width: '80%', display: 'inline-block'}}
                         valueField='id'
                         textField='displayValue'
                         data={this.state.foundNames}
@@ -161,62 +173,66 @@ class Form extends Component {
                             }
                         })}
                     />
-                </div>
-                <div>
-                    <div>
-                        <label htmlFor='datingStart'>{ t('outfitForm:dating.start.label') }</label>
-                        <DateTimePicker
-                            id='datingStart'
-                            name='datingStart'
-                            min={new Date(966, 0, 1)}
-                            max={new  Date()}
-                            format='Y'
-                            date={true}
-                            time={false}
-                            views={['decade', 'century']}
-                            defaultValue={this.state.datingStart}
-                            onChange={(value) => this.handleInputChange({
-                                target: {
-                                    type: 'datetime',
-                                    name: 'datingStart',
-                                    value: value
-                                }
-                            })}
-                        />
+                </InputGroup>
+                <InputGroup>
+                    <Label htmlFor='dating'>{ t('outfitForm:dating.label') }</Label>
+                    <div id='dating' style={{display: 'inline-block'}}>
+                        <div style={{display: 'inline-block'}}>
+                            <label htmlFor='datingStart'>{ t('outfitForm:dating.start.label') }</label>
+                            <DateTimePicker
+                                id='datingStart'
+                                name='datingStart'
+                                style={{width: '100px', display: 'inline-block'}}
+                                min={new Date(966, 0, 1)}
+                                max={new  Date()}
+                                format='Y'
+                                date={true}
+                                time={false}
+                                views={['decade', 'century']}
+                                defaultValue={this.state.datingStart}
+                                onChange={(value) => this.handleInputChange({
+                                    target: {
+                                        type: 'datetime',
+                                        name: 'datingStart',
+                                        value: value
+                                    }
+                                })}
+                            />
+                        </div>
+                        <div style={{display: 'inline-block'}}>
+                            <label htmlFor='datingEnd'>{ t('outfitForm:dating.end.label') }</label>
+                            <DateTimePicker
+                                id='datingEnd'
+                                name='datingEnd'
+                                style={{width: '100px', display: 'inline-block'}}
+                                min={new Date(966, 0, 1)}
+                                max={new  Date()}
+                                format='Y'
+                                date={true}
+                                time={false}
+                                views={['decade', 'century']}
+                                defaultValue={this.state.datingEnd}
+                                onChange={(value) => this.handleInputChange({
+                                    target: {
+                                        type: 'datetime',
+                                        name: 'datingEnd',
+                                        value: value
+                                    }
+                                })}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <label htmlFor='datingEnd'>{ t('outfitForm:dating.end.label') }</label>
-                        <DateTimePicker
-                            id='datingEnd'
-                            name='datingEnd'
-                            min={new Date(966, 0, 1)}
-                            max={new  Date()}
-                            format='Y'
-                            date={true}
-                            time={false}
-                            views={['decade', 'century']}
-                            defaultValue={this.state.datingEnd}
-                            onChange={(value) => this.handleInputChange({
-                                target: {
-                                    type: 'datetime',
-                                    name: 'datingEnd',
-                                    value: value
-                                }
-                            })}
-                        />
-                    </div>
-                </div>
-                <div>
-                    <label htmlFor='description'>{ t('description.label') }</label>
-                    <input
-                        type='text'
+                </InputGroup>
+                <InputGroup>
+                    <Label htmlFor='description'>{ t('description.label') }</Label>
+                    <TextInput
                         name='description'
                         value={this.state.description}
                         onChange={this.handleInputChange}
                     />
-                </div>
-                <div>
-                    <label htmlFor='image'>{ t('image.label') }</label>
+                </InputGroup>
+                <InputGroup>
+                    <Label htmlFor='image'>{ t('image.label') }</Label>
                     <input
                         type='file'
                         name='image'
@@ -224,10 +240,10 @@ class Form extends Component {
                         multiple={true}
                         accept="image/jpeg,image/png"
                     />
-                </div>
-                <button type='submit' disabled={this.state.isSubmitting}>
+                </InputGroup>
+                <SubmitButton type='submit' disabled={this.state.isSubmitting}>
                     { t('outfitForm:submit.label') }
-                </button>
+                </SubmitButton>
             </form>
         );
     }

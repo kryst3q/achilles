@@ -1,5 +1,6 @@
 {
   "dating": {
+    "label": "Dating",
     "start": {
       "label": "From"
     },
@@ -17,6 +18,6 @@
     "label": "Names"
   },
   "submit": {
-    "label": "Send"
+    "label": "Save"
   }
 }
