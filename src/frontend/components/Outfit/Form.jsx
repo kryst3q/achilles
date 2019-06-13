@@ -11,6 +11,7 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            Images: [],
             Names: [],
             datingStart: new Date(),
             datingEnd: new Date(),
@@ -20,6 +21,7 @@ class Form extends Component {
             Language: {}
         };
 
+        this.handleImageUpload = this.handleImageUpload.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleNameCreate = this.handleNameCreate.bind(this);
         this.handleNameSearch = this.handleNameSearch.bind(this);
@@ -38,6 +40,26 @@ class Form extends Component {
             .catch(err => {
                 console.log(err);
             });
+    }
+
+    handleImageUpload(event) {
+        let files = this.imageFileInput.current.files;
+
+        for (let i = 0; i < files.length; i++) {
+            let formData = new FormData();
+            formData.append('file', files[i]);
+
+            axios.post('/image', formData)
+                .then(res => {
+                    let Images = this.state.Images;
+                    Images.push(res.data);
+
+                    this.setState({
+                        Images: Images
+                    })
+                })
+                .catch(err => console.log(err))
+        }
     }
 
     handleInputChange(event) {
@@ -93,25 +115,10 @@ class Form extends Component {
             isSubmitting: true
         });
 
-        let files = this.imageFileInput.current.files;
-        let promises = [];
-
-        Array.from(files).map(file => promises.push(
-                new Promise(function (resolve, reject) {
-                    let formData = new FormData();
-                    formData.append('file', file);
-
-                    axios.post('/image/', formData)
-                        .then(res => resolve(res.data))
-                        .catch(err => reject(console.log(err)))
-                })
-            )
-        );
-
         Promise.all(promises).then((Images) => {
             let data = {
                 Names: this.state.Names,
-                Images: Images,
+                Images: this.state.Images,
                 Description: {
                     description: this.state.description,
                     LanguageId: this.state.Language.id
@@ -237,6 +244,7 @@ class Form extends Component {
                         type='file'
                         name='image'
                         ref={this.imageFileInput}
+                        onChange={this.handleImageUpload}
                         multiple={true}
                         accept="image/jpeg,image/png"
                     />
