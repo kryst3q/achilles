@@ -1,6 +1,6 @@
 import React from 'react';
 import Navlink from './Navlink';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledNavbar = styled('div')`
 	float: left;
