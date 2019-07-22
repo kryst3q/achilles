@@ -1,5 +1,10 @@
 # achilles
 
+## RUN
+1. Clone the repo.
+2. Go to the repo dir.
+3. Execute "npm run dev".
+
 ## TODO
 * add dark/light theme
 * how set up global vars (passing theme info, spinner config etc.)
