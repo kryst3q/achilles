@@ -8,7 +8,6 @@
 ## TODO
 * add dark/light theme
 * how set up global vars (passing theme info, spinner config etc.)
-* use [styled-components](https://www.styled-components.com/)
 * add Relic model
 * add Reference model (bibliography management)
 * init swagger openapi 3
@@ -35,6 +34,7 @@
 * handle cascade delete in outfit
 * handle saving new names
 * handle managing names
+* use [styled-components](https://www.styled-components.com/)
 
 ## NO
 * form validation

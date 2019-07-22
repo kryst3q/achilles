@@ -43,6 +43,7 @@ class Form extends Component {
     }
 
     handleImageUpload(event) {
+        this.state.isSubmitting = true;
         let files = this.imageFileInput.current.files;
 
         for (let i = 0; i < files.length; i++) {
@@ -59,6 +60,7 @@ class Form extends Component {
                     })
                 })
                 .catch(err => console.log(err))
+                .finally(() => this.state.isSubmitting = false);
         }
     }
 
@@ -115,35 +117,33 @@ class Form extends Component {
             isSubmitting: true
         });
 
-        Promise.all(promises).then((Images) => {
-            let data = {
-                Names: this.state.Names,
-                Images: this.state.Images,
-                Description: {
-                    description: this.state.description,
-                    LanguageId: this.state.Language.id
-                },
-                Datings: [
-                    {
-                        start: this.state.datingStart,
-                        end: this.state.datingEnd
-                    }
-                ]
-            };
+        let data = {
+            Names: this.state.Names,
+            Images: this.state.Images,
+            Description: {
+                description: this.state.description,
+                LanguageId: this.state.Language.id
+            },
+            Datings: [
+                {
+                    start: this.state.datingStart,
+                    end: this.state.datingEnd
+                }
+            ]
+        };
 
-            axios.post('/outfit', data)
-                .then(res => {
-                    console.log(res);
+        axios.post('/outfit', data)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => {
+                this.setState({
+                    isSubmitting: false
                 })
-                .catch(err => {
-                    console.log(err);
-                })
-                .finally(() => {
-                    this.setState({
-                        isSubmitting: false
-                    })
-                });
-        });
+            });
     }
 
     render() {
