@@ -3,7 +3,8 @@
 ## RUN
 1. Clone the repo.
 2. Go to the repo dir.
-3. Execute "npm run dev".
+3. Copy "<project_root_dir>/backend/db.sqlite3" file to project root dir.
+4. Execute "npm run dev".
 
 ## TODO
 * add dark/light theme
